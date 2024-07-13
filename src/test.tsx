@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './hello.css';
-const Hello = () => {
+import { Button } from 'react-bootstrap';
+
+const MyComponent: React.FC = () => {
     return (
-        <div className='parentElement'>
-            <div className='childrenElement'>
-                <h1>hadgsfigfeiu</h1>
-            </div>
+        <div className="container">
+            <h1 className="my-4">Hello, Bootstrap in React!</h1>
+            <Button variant="primary">Click Me</Button>
         </div>
-    )
+    );
 }
 
-export default Hello
+export default MyComponent;

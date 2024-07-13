@@ -1,10 +1,11 @@
 import React from 'react';
-import Hello from './test';
-import './App.css';
+import MyComponent from './test';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Hello />
+    <div>
+      <MyComponent />
+    </div>
   );
 }
 
