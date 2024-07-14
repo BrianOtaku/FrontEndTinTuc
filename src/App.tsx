@@ -1,5 +1,5 @@
 import React from 'react';
-import Switch from './test';
+import Switch from './testIndex';
 
 function App() {
   return (

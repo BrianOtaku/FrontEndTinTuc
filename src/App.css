@@ -1,12 +1,56 @@
-.parent-container {
+/* css cho trang chu */
+body
+{
+  background-color: none;
+  padding-top: 1vh;
+}
+
+.parent-container 
+{
+  background-color: white;
   width: 90%;
   margin: auto;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 10px 10px gray;
 }
 
-.banner-image {
+.banner-image 
+{
   width: 100%;
-  height: 10vh; /* 10% of the viewport height */
+  height: 20vh;
   object-fit: cover;
+}
+
+.tabs-container 
+{
+  padding-top: 10px;
+}
+
+/* css cho trang tittle */
+.tittle 
+{
+  font-size: 20vh;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  background: linear-gradient(90deg, #00c3ff, #ff00dd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* css cho trang login */
+.login-container {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.close-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
