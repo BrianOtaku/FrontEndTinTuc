@@ -1,10 +1,10 @@
 import React from 'react';
-import MyComponent from './test';
+import Switch from './test';
 
-const App: React.FC = () => {
+function App() {
   return (
     <div>
-      <MyComponent />
+      <Switch />
     </div>
   );
 }
