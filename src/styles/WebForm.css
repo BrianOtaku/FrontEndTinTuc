@@ -1,0 +1,51 @@
+body
+{
+  background-color: none;
+}
+
+.parent-container 
+{
+  width: 100%;
+  margin: 0 auto;
+  height: auto;
+  /* padding-top: 130px; */
+}
+
+.content-container 
+{
+  display: flex;
+  background-color: white;
+  border: 1px solid black;
+  border-top: 0;
+  border-bottom: 0;
+  width: 83%;
+  padding: 10px;
+  margin: 20px auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.main-content 
+{
+  /* border: 1px solid black; */
+  width: 75%;
+}
+
+.side-content 
+{
+  border: 0px;
+  margin-left: 10px;
+  width: 35%;
+  height: 100%;
+  background-color: rgb(237, 237, 237);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+aside
+{
+  float: right;
+  width: 30%;
+  height: 100%;
+  border: 1px solid black;
+}

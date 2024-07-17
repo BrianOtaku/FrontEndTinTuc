@@ -13,17 +13,16 @@ function Taskbar() {
     return (
         <Navbar expand="lg" className="bg-gray">
             <Container>
-                <Navbar.Brand as={Link} to="/" className='logo text-white'>React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className='logo'>React-Bootstrap</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/" >Home</Nav.Link>
                         <Nav.Link as={Link} to="/news" >News</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="text-white">
+                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/action">Action</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/another-action">Another action</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/something">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
                             <NavDropdown.Item as={Link} to="/separated-link">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>

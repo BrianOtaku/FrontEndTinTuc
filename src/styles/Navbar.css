@@ -1,40 +1,16 @@
-body
-{
-  background-color: none;
-}
-
-.parent-container 
-{
-  width: 100%;
-  margin: 0 auto;
-  height: auto;
-}
-
-.content-container 
-{
-  background-color: white;
-  border: 1px solid black;
-  border-top: 0;
-  width: 83%;
-  padding: 10px;
-  margin: 20px auto;
-  margin-top: 0;
-}
-
-aside
-{
-  float: right;
-  width: 30%;
-  height: 100%;
-  border: 1px solid black;
-}
-
 .navbar-nav .nav-link,
 .navbar-brand
 {
   color: black;
   font-size: 3vh;
   font-family: 'Times New Roman', Times, serif;
+}
+
+.separator
+{
+  width: 100%;
+  height: 10px;
+  background-color: #8e8d8d;
 }
 
 .logo
@@ -52,6 +28,15 @@ aside
 {
   background-color: rgb(227, 227, 227);
 }
+
+/* CSS cho navbar cố định */
+/* .fixed-navbar 
+{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; Đảm bảo navbar luôn ở trên cùng
+} */
 
 /* css cho trang chu */
 /* body
