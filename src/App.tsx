@@ -19,6 +19,7 @@ import Footer from './pages/Footer';
 import './styles/Navbar.css';
 import './styles/Footer.css';
 import './styles/WebForm.css';
+import './styles/Home.css'
 
 function App() {
   return (
