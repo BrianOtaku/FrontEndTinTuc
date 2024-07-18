@@ -1,0 +1,45 @@
+.signup-container 
+{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 70vh;
+}
+
+.signup-container h1 
+{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-button 
+{
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.textSignUp
+{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.textSignUp div
+{
+    font-size: 18px;
+}
+
+.showButtonSignUp
+{
+    border: 1px solid lightgray;
+    border-left: 0px;
+    background-color: white;
+}
+
+.input-group-text 
+{
+    cursor: pointer;
+}

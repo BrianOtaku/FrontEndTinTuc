@@ -1,0 +1,51 @@
+.signin-container 
+{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 70vh;
+}
+
+.signin-container h1 
+{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signin-button 
+{
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.textSignIn
+{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.textSignIn div
+{
+    font-size: 18px;
+}
+
+.showButtonSignIn
+{
+    border: 1px solid lightgray;
+    border-left: 0px;
+    background-color: white;
+}
+
+.SignUpLink
+{
+    /* border: 1px solid black; */
+    margin-bottom: 0px;
+}
+
+.input-group-text 
+{
+    cursor: pointer;
+}

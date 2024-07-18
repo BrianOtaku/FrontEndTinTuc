@@ -3,7 +3,6 @@
 {
   color: black;
   font-size: 3vh;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 .separator
@@ -16,7 +15,6 @@
 .logo
 {
   font-size: 10vh;
-  font-family: 'Times New Roman', Times, serif;
   text-align: center;
   background: linear-gradient(90deg, #575757, #1c1c1c, rgb(98, 98, 98), rgb(32, 32, 32));
   -webkit-background-clip: text;
