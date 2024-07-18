@@ -46,7 +46,7 @@ const Home: React.FC = () => {
     return (
         <Container className="home">
             <h1>Top Headlines</h1>
-            <Row className="articles">
+            <Row className="article-container">
                 {articles.map((article, index) => (
                     <Col key={index} xs={12} className="article">
                         <h2>{article.title}</h2>
