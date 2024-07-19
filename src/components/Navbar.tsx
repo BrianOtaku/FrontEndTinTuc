@@ -7,7 +7,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Taskbar() {
     return (
@@ -39,7 +41,7 @@ function Taskbar() {
                             aria-label="Search"
                         />
                         <Button variant="outline-dark" size="sm">
-                            Search
+                            <FontAwesomeIcon icon={faSearch} className='iconSearch' />
                         </Button>
                     </Form>
                 </Navbar.Collapse>

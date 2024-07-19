@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Form, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-
 const SignIn: React.FC = () => {
-    const [email, setEmail] = useState<string>('');
+    const [identifier, setIdentifier] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const navigate = useNavigate();
@@ -12,7 +11,7 @@ const SignIn: React.FC = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         // Handle sign in logic here
-        console.log('Email:', email);
+        console.log('Identifier (Email/Username):', identifier);
         console.log('Password:', password);
     };
 
@@ -25,21 +24,21 @@ const SignIn: React.FC = () => {
             <h1>Sign In</h1>
             <div>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formEmail">
-                        <Form.Label>Email address</Form.Label>
+                    <Form.Group controlId="formIdentifier">
+                        <Form.Label>Email address or Username:</Form.Label>
                         <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            placeholder="Enter email/username"
+                            value={identifier}
+                            onChange={(e) => setIdentifier(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Password:</Form.Label>
                         <InputGroup>
                             <FormControl
                                 type={showPassword ? "text" : "password"}
-                                placeholder="Password"
+                                placeholder="Enter Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -48,7 +47,7 @@ const SignIn: React.FC = () => {
                             </Button>
                         </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="w-100 mt-3">
+                    <Button variant="dark" type="submit" className="w-100 mt-3">
                         Sign In
                     </Button>
                     <div className="textSignIn">

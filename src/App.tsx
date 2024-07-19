@@ -14,11 +14,13 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Aside from './pages/Aside';
 import Footer from './pages/Footer';
+import OffcanvasComponent from './components/Offcanvas';
 
 // import css bo cuc
 import './styles/Navbar.css';
 import './styles/Footer.css';
 import './styles/WebForm.css';
+import './styles/Offcanvas.css';
 
 // import css trang
 import './styles/Home.css';
@@ -30,7 +32,9 @@ function App() {
     <Router>
       <div className="parent-container">
         <Taskbar />
-        <div className="separator"></div>
+        <div className="separator">
+          <OffcanvasComponent />
+        </div>
         <div className="content-container">
           <div className="main-content">
             <Routes>
