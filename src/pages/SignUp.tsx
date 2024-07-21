@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
+import { Form, Button, Container, InputGroup, FormControl, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
@@ -9,18 +9,25 @@ const SignUp: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Handle sign up logic here
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+
+        if (!email || !username || !password || !confirmPassword) {
+            setErrorMessage('Please fill out all fields.');
             return;
         }
-        console.log('Email:', email);
-        console.log('Username:', username);
-        console.log('Password:', password);
+
+        if (password !== confirmPassword) {
+            setErrorMessage("Passwords do not match!");
+            return;
+        }
+
+        setErrorMessage('');
+        setShowModal(true);
     };
 
     const toggleShowPassword = () => {
@@ -29,6 +36,11 @@ const SignUp: React.FC = () => {
 
     const toggleShowConfirmPassword = () => {
         setShowConfirmPassword(!showConfirmPassword);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        navigate('/login');
     };
 
     return (
@@ -43,15 +55,15 @@ const SignUp: React.FC = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
-                    <Form.Group controlId="formEmail">
-                        <Form.Label>Email address:</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
+                </Form.Group>
+                <Form.Group controlId="formEmail">
+                    <Form.Label>Email address:</Form.Label>
+                    <Form.Control
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </Form.Group>
                 <Form.Group controlId="formPassword">
                     <Form.Label>Password:</Form.Label>
@@ -81,6 +93,7 @@ const SignUp: React.FC = () => {
                         </Button>
                     </InputGroup>
                 </Form.Group>
+                {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
                 <Button variant="dark" type="submit" className="w-100 mt-3">
                     Sign Up
                 </Button>
@@ -91,6 +104,20 @@ const SignUp: React.FC = () => {
                     </Button>
                 </div>
             </Form>
+
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Sign Up Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    You have signed up successfully! Please sign in to continue.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleCloseModal}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };
