@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../API/axiosConfig';
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 interface Article {
     title: string;
@@ -51,9 +52,9 @@ const Home: React.FC = () => {
                     <Col key={index} xs={12} className="article">
                         <h2>{article.title}</h2>
                         <p>{article.description}</p>
-                        <a href={article.url} target="_blank" rel="noopener noreferrer">
+                        <Link to={`/article/${index}`}>
                             Read more
-                        </a>
+                        </Link>
                     </Col>
                 ))}
             </Row>
