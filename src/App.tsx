@@ -31,6 +31,7 @@ import './styles/SignUp.css';
 const ContentContainer: React.FC = () => {
   const location = useLocation();
   const isArticleDetail = location.pathname.startsWith('/article');
+  const isSignPage = location.pathname === '/login' || location.pathname === '/signup';
 
   return (
     <div className="content-container">
@@ -47,7 +48,7 @@ const ContentContainer: React.FC = () => {
           <Route path="/article/:articleId" element={<ArticleDetail />} />
         </Routes>
       </div>
-      {!isArticleDetail && (
+      {!isArticleDetail && !isSignPage && (
         <aside className="side-content">
           <Aside />
         </aside>

@@ -93,7 +93,9 @@ const SignUp: React.FC = () => {
                         </Button>
                     </InputGroup>
                 </Form.Group>
+
                 {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
+
                 <Button variant="dark" type="submit" className="w-100 mt-3">
                     Sign Up
                 </Button>

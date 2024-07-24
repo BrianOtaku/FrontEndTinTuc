@@ -56,7 +56,7 @@ const ArticleDetail: React.FC = () => {
                     </Row>
                 </>
             ) : (
-                <div>
+                <div className='testing'>
                     <h1>Loading...</h1>
                 </div>
             )}

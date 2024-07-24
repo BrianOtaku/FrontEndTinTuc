@@ -6,13 +6,20 @@ const SignIn: React.FC = () => {
     const [identifier, setIdentifier] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Handle sign in logic here
+
+        if (!identifier || !password) {
+            setErrorMessage('Please fill out all fields.');
+            return;
+        }
+
         console.log('Identifier (Email/Username):', identifier);
         console.log('Password:', password);
+        setErrorMessage('');
     };
 
     const toggleShowPassword = () => {
@@ -47,6 +54,9 @@ const SignIn: React.FC = () => {
                             </Button>
                         </InputGroup>
                     </Form.Group>
+
+                    {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
+
                     <Button variant="dark" type="submit" className="w-100 mt-3">
                         Sign In
                     </Button>
