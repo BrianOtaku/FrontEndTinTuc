@@ -1,9 +1,28 @@
 .home 
 {
+    /* border: 1px solid black; */
+    display: flex;
     width: 100%;
-    margin: 0 auto;
+    padding-right: 0px;
 }
   
+.homeandaside
+{
+    width: 70%;
+    margin-right: 10px;
+}
+
+.side-content 
+{
+  border: 0px;
+  margin-left: 10px;
+  width: 30%;
+  height: 100%;
+  background-color: rgb(237, 237, 237);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 .article-container 
 {
     /* border: 1px solid black; */
@@ -32,7 +51,7 @@
     color: white;
     border: none;
     border-radius: 15px;
-    cursor: pointer; /*chuyen thanh hinh ban tay*/
+    cursor: pointer;
     text-align: center;
 }
   

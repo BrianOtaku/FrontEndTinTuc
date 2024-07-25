@@ -3,7 +3,7 @@ import CommentSection from '../components/CommentSection';
 
 const Aside: React.FC = () => {
     return (
-        <div className="aside-container">
+        <div>
             <h2>Forum</h2>
             <CommentSection />
         </div>

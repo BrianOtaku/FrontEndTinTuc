@@ -1,7 +1,8 @@
+// Home.tsx
 import React, { useState, useEffect } from 'react';
 import axios from '../API/axiosConfig';
 import { Button, Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import Aside from './Aside';
 
 interface Article {
     title: string;
@@ -46,23 +47,28 @@ const Home: React.FC = () => {
 
     return (
         <Container className="home">
-            <h1>Top Headlines</h1>
-            <Row className="article-container">
-                {articles.map((article, index) => (
-                    <Col key={index} xs={12} className="article">
-                        <h2>{article.title}</h2>
-                        <p>{article.description}</p>
-                        <Link to={`/article/${index}`}>
-                            Read more
-                        </Link>
-                    </Col>
-                ))}
-            </Row>
-            {hasMore && (
-                <Button onClick={loadMore} className="load-more">
-                    Load More
-                </Button>
-            )}
+            <div className='homeandaside'>
+                <h1>Top Headlines</h1>
+                <Row className="article-container">
+                    {articles.map((article, index) => (
+                        <Col key={index} xs={12} className="article">
+                            <h2>{article.title}</h2>
+                            <p>{article.description}</p>
+                            <a href={article.url} target="_blank" rel="noopener noreferrer">
+                                Read more
+                            </a>
+                        </Col>
+                    ))}
+                </Row>
+                {hasMore && (
+                    <Button onClick={loadMore} className="load-more">
+                        Load More
+                    </Button>
+                )}
+            </div>
+            <div className='side-content'>
+                <Aside />
+            </div>
         </Container>
     );
 };
