@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'https://localhost:7161/api/News',  // Thay đổi URL này với URL API của bạn
+const AxiosInstance = axios.create({
+  baseURL: 'https://localhost:7161/api/News',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-export default axiosInstance;
+export default AxiosInstance;

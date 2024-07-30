@@ -1,50 +1,29 @@
-import axiosInstance from './axiosConfig';
+import AxiosInstance from './axiosConfig';
 
 interface Data {
-    id?: number;
+    id: number;
     title: string;
     content: string;
 }
 
-// CREATE
-export const createNews = async (data: Data) => {
+// FETCH
+export const fetchNews = async (): Promise<Data[]> => {
     try {
-        const response = await axiosInstance.post('/News', data);
+        const response = await AxiosInstance.get('/News');
         return response.data;
     } catch (error) {
-        console.error('Error creating data:', error);
-        throw error;
-    }
-};
-
-// READ
-export const fetchNews = async () => {
-    try {
-        const response = await axiosInstance.get('/News');
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching news:', error);
         throw error;
     }
 };
 
 // UPDATE
-export const updateNews = async (id: number, updatedData: Partial<Data>) => {
+export const updateNews = async (id: number, updatedData: Partial<Data>): Promise<Data> => {
     try {
-        const response = await axiosInstance.put(`/News/${id}`, updatedData);
+        const response = await AxiosInstance.put(`/News/${id}`, updatedData);
         return response.data;
     } catch (error) {
-        console.error('Error updating data:', error);
-        throw error;
-    }
-};
-
-// DELETE
-export const deleteNews = async (id: number) => {
-    try {
-        await axiosInstance.delete(`/News/${id}`);
-    } catch (error) {
-        console.error('Error deleting data:', error);
+        console.error('Error updating news:', error);
         throw error;
     }
 };

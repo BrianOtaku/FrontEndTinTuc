@@ -1,70 +1,70 @@
-// Home.tsx
 import React, { useState, useEffect } from 'react';
-import axios from '../API/axiosConfig';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { fetchNews, updateNews } from '../API/apiNews';
 import Aside from './Aside';
 
-interface Article {
+interface Data {
+    id: number;
     title: string;
-    description: string;
-    url: string;
-    urlToImage: string;
+    content: string;
 }
 
 const Home: React.FC = () => {
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [page, setPage] = useState<number>(1);
-    const [hasMore, setHasMore] = useState<boolean>(true);
+    const [dataList, setDataList] = useState<Data[]>([]);
+    const [editingData, setEditingData] = useState<Data | null>(null);
 
     useEffect(() => {
-        fetchArticles(page);
-    }, [page]);
-
-    const fetchArticles = async (page: number) => {
-        try {
-            const response = await axios.get(`/top-headlines`, {
-                params: {
-                    country: 'us',
-                    page: page,
-                    pageSize: 10,
-                },
-            });
-            if (response.data.articles.length > 0) {
-                setArticles((prevArticles) => [...prevArticles, ...response.data.articles]);
-            } else {
-                setHasMore(false);
+        const getData = async () => {
+            const data = await fetchNews();
+            setDataList(data);
+            if (data.length > 0) {
+                setEditingData(data[0]);
             }
-        } catch (error) {
-            console.error('Error fetching articles:', error);
-        }
-    };
+        };
 
-    const loadMore = () => {
-        if (hasMore) {
-            setPage((prevPage) => prevPage + 1);
+        getData();
+    }, []);
+
+    const handleUpdate = async () => {
+        if (editingData && editingData.id) {
+            const updatedData = await updateNews(editingData.id, editingData);
+            setDataList(dataList.map(d => (d.id === updatedData.id ? updatedData : d)));
         }
     };
 
     return (
         <Container className="home">
             <div className='homeandaside'>
-                <h1>Top Headlines</h1>
-                <Row className="article-container">
-                    {articles.map((article, index) => (
-                        <Col key={index} xs={12} className="article">
-                            <h2>{article.title}</h2>
-                            <p>{article.description}</p>
-                            <a href={article.url} target="_blank" rel="noopener noreferrer">
-                                Read more
-                            </a>
-                        </Col>
-                    ))}
-                </Row>
-                {hasMore && (
-                    <Button onClick={loadMore} className="load-more">
-                        Load More
-                    </Button>
+                <h1>News Data</h1>
+
+                {/* Form để hiển thị và chỉnh sửa dữ liệu */}
+                {editingData && (
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            value={editingData.title}
+                            onChange={(e) => setEditingData({ ...editingData, title: e.target.value })}
+                        />
+                        <textarea
+                            placeholder="Content"
+                            value={editingData.content}
+                            onChange={(e) => setEditingData({ ...editingData, content: e.target.value })}
+                        ></textarea>
+                        <button onClick={handleUpdate}>Update</button>
+                    </div>
                 )}
+
+                {/* Danh sách dữ liệu */}
+                <ul>
+                    {dataList.map((data) => (
+                        <li key={data.id}>
+                            <h2>{data.title}</h2>
+                            <p>{data.content}</p>
+                            <button onClick={() => setEditingData(data)}>Edit</button>
+                        </li>
+                    ))}
+                </ul>
             </div>
             <div className='side-content'>
                 <Aside />
