@@ -36,17 +36,17 @@ const Home: React.FC = () => {
     return (
         <Container className="home">
             <div className="homeandaside">
-                <ul className="news-list">
+                <div className="news-list">
                     {dataList.map((data) => (
-                        <li key={data.id} className="news-item">
+                        <div key={data.id} className="news-item gap-between">
                             <h2 className="news-title" onClick={() => handleTitleClick(data.id)}>{data.title}</h2>
                             <a href={data.linkDetail} target="_blank" rel="noopener noreferrer" className="news-link">
                                 <img src={data.imageUrl} alt={data.title} className="news-image" />
                             </a>
                             <p className="news-description">{data.description}</p>
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
                 {selectedNewsId && (
                     <div className="news-content Normal">
                         {dataList.find((data) => data.id === selectedNewsId)?.content}

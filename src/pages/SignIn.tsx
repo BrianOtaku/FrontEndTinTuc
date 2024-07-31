@@ -13,7 +13,7 @@ const SignIn: React.FC = () => {
         event.preventDefault();
 
         if (!identifier || !password) {
-            setErrorMessage('Please fill out all fields.');
+            setErrorMessage('Xin vui lòng nhập thông tin đầy đủ!');
             return;
         }
 
@@ -28,29 +28,29 @@ const SignIn: React.FC = () => {
 
     return (
         <Container className="signin-container">
-            <h1>Sign In</h1>
+            <h1>Đăng Nhập</h1>
             <div>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formIdentifier">
-                        <Form.Label>Email address or Username:</Form.Label>
+                        <Form.Label>Email hoặc Tên người dùng:</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Enter email/username"
+                            placeholder="Nhập email/Tên người dùng"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group controlId="formPassword">
-                        <Form.Label>Password:</Form.Label>
+                        <Form.Label>Mật khẩu:</Form.Label>
                         <InputGroup>
                             <FormControl
                                 type={showPassword ? "text" : "password"}
-                                placeholder="Enter Password"
+                                placeholder="Nhập mật khẩu"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <Button variant="outline-secondary" onClick={toggleShowPassword} className='showButtonSignIn'>
-                                {showPassword ? "Hide" : "Show"}
+                                {showPassword ? "Ẩn" : "Hiện"}
                             </Button>
                         </InputGroup>
                     </Form.Group>
@@ -58,12 +58,12 @@ const SignIn: React.FC = () => {
                     {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
 
                     <Button variant="dark" type="submit" className="w-100 mt-3">
-                        Sign In
+                        Đăng nhập
                     </Button>
                     <div className="textSignIn">
-                        <div>Haven't signed up yet? </div>
+                        <div>Chưa có tài khoản? </div>
                         <Button variant="link" onClick={() => navigate('/signup')} className='SignUpLink'>
-                            Sign Up
+                            Đăng ký tài khoản
                         </Button>
                     </div>
                 </Form>

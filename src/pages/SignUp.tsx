@@ -17,12 +17,12 @@ const SignUp: React.FC = () => {
         event.preventDefault();
 
         if (!email || !username || !password || !confirmPassword) {
-            setErrorMessage('Please fill out all fields.');
+            setErrorMessage('Xin vui lòng nhập thông tin đầy đủ!');
             return;
         }
 
         if (password !== confirmPassword) {
-            setErrorMessage("Passwords do not match!");
+            setErrorMessage("Không trùng mật khẩu!");
             return;
         }
 
@@ -45,51 +45,51 @@ const SignUp: React.FC = () => {
 
     return (
         <Container className="signup-container">
-            <h1>Sign Up</h1>
+            <h1>Đăng Ký</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formUsername">
-                    <Form.Label>Username:</Form.Label>
+                    <Form.Label>Tên người dùng:</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Enter username"
+                        placeholder="Nhập tên người dùng"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Group>
                 <Form.Group controlId="formEmail">
-                    <Form.Label>Email address:</Form.Label>
+                    <Form.Label>Nhập địa chỉ Email:</Form.Label>
                     <Form.Control
                         type="email"
-                        placeholder="Enter email"
+                        placeholder="Nhập Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </Form.Group>
                 <Form.Group controlId="formPassword">
-                    <Form.Label>Password:</Form.Label>
+                    <Form.Label>Mật khẩu:</Form.Label>
                     <InputGroup>
                         <FormControl
                             type={showPassword ? "text" : "password"}
-                            placeholder="Enter Password"
+                            placeholder="Nhập mật khẩu"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Button variant="outline-secondary" onClick={toggleShowPassword} className='showButtonSignUp'>
-                            {showPassword ? "Hide" : "Show"}
+                            {showPassword ? "Ẩn" : "Hiện"}
                         </Button>
                     </InputGroup>
                 </Form.Group>
                 <Form.Group controlId="formConfirmPassword">
-                    <Form.Label>Confirm Password:</Form.Label>
+                    <Form.Label>Xác nhận lại mật khẩu:</Form.Label>
                     <InputGroup>
                         <FormControl
                             type={showConfirmPassword ? "text" : "password"}
-                            placeholder="Confirm Password"
+                            placeholder="Nhập mật khẩu"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                         <Button variant="outline-secondary" onClick={toggleShowConfirmPassword} className='showButtonSignUp'>
-                            {showConfirmPassword ? "Hide" : "Show"}
+                            {showConfirmPassword ? "Ẩn" : "Hiện"}
                         </Button>
                     </InputGroup>
                 </Form.Group>
@@ -97,22 +97,22 @@ const SignUp: React.FC = () => {
                 {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
 
                 <Button variant="dark" type="submit" className="w-100 mt-3">
-                    Sign Up
+                    Đăng ký
                 </Button>
                 <div className="textSignUp">
-                    <div>Already have an account? </div>
+                    <div>Đã có sẵn tài khoản?</div>
                     <Button variant="link" onClick={() => navigate('/login')} className='SignInLink'>
-                        Sign In
+                        Đăng nhập
                     </Button>
                 </div>
             </Form>
 
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Sign Up Successful</Modal.Title>
+                    <Modal.Title>Đăng ký thành công!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    You have signed up successfully! Please sign in to continue.
+                    Bạn đã đăng ký thành công! Xin vui lòng đăng nhập để tiếp tục.
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleCloseModal}>

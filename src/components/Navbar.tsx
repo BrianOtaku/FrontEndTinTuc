@@ -15,27 +15,27 @@ function Taskbar() {
     return (
         <Navbar expand="lg" className="bg-gray">
             <Container>
-                <Navbar.Brand as={Link} to="/" className='logo'>React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className='logo'>The 3TN-News</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/" >Home</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/action">Action</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/another-action">Another action</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/something">Something</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/separated-link">Separated link</NavDropdown.Item>
+                        <Nav.Link as={Link} to="/" >Trang Chủ</Nav.Link>
+                        <NavDropdown title="Thể Loại" id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="/action">Chính trị</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/another-action">Dân sinh</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/something">Lao động việc làm</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/separated-link">Giao thông</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav className="mr-auto">
                         <Nav.Link as={Link} to="/login">
-                            <Button variant="outline-dark">Sign in</Button>
+                            <Button variant="outline-dark">Đăng Nhập</Button>
                         </Nav.Link>
                     </Nav>
                     <Form className="d-flex">
                         <FormControl
                             type="search"
-                            placeholder="Search"
+                            placeholder="Tìm kiếm"
                             className="mr-2 form-control-md"
                             aria-label="Search"
                         />
