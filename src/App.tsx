@@ -3,14 +3,13 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //import chuong trinh
-import Action from './pages/Action';
-import AnotherAction from './pages/AnotherAction';
-import ArticleDetail from './pages/ArticleDetail';
+import Action from './pages/Political';
+import AnotherAction from './pages/Populace';
 import Footer from './pages/Footer';
 import Taskbar from './components/Navbar';
 import Home from './pages/Home';
-import Something from './pages/Something';
-import SeparatedLink from './pages/SeparatedLink';
+import Something from './pages/Labour';
+import SeparatedLink from './pages/Transport';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import OffcanvasComponent from './components/Offcanvas';
@@ -44,7 +43,6 @@ function App() {
               <Route path="/separated-link" element={<SeparatedLink />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/article/:articleId" element={<ArticleDetail />} />
             </Routes>
           </div>
         </div>
