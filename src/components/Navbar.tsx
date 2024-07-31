@@ -20,7 +20,6 @@ function Taskbar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/" >Home</Nav.Link>
-                        <Nav.Link as={Link} to="/news" >News</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/action">Action</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/another-action">Another action</NavDropdown.Item>

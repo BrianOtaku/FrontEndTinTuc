@@ -9,7 +9,6 @@ import ArticleDetail from './pages/ArticleDetail';
 import Footer from './pages/Footer';
 import Taskbar from './components/Navbar';
 import Home from './pages/Home';
-import News from './pages/News';
 import Something from './pages/Something';
 import SeparatedLink from './pages/SeparatedLink';
 import SignUp from './pages/SignUp';
@@ -39,7 +38,6 @@ function App() {
           <div className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/news" element={<News />} />
               <Route path="/action" element={<Action />} />
               <Route path="/another-action" element={<AnotherAction />} />
               <Route path="/something" element={<Something />} />
