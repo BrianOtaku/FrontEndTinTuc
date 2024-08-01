@@ -6,11 +6,11 @@ function Footer() {
     return (
         <footer className="footer">
             <div className="footer-content">
-                <div className="footer-column">
+                <div className="footer-column contact">
                     <h3>Liên Hệ:</h3>
                     <div className="contact-item">
                         <FontAwesomeIcon icon={faFacebookSquare} className='icon' />
-                        <a href="https://www.facebook.com/nguyentambao" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.facebook.com/bao.nguyentam.585/" target="_blank" rel="noopener noreferrer">
                             Nguyễn Tâm Bảo
                         </a>
                     </div>
@@ -28,13 +28,12 @@ function Footer() {
                     </div>
                 </div>
                 <div className="footer-column">
-                    <h3>Column 2</h3>
-                    <p>Content for column 2</p>
+                    <h3>The 3TN-News</h3>
+                    <p></p>
                 </div>
-                <div className="footer-column">
-                    <h3>Column 3</h3>
-                    <p>Content for column 3</p>
-                </div>
+            </div>
+            <div className="footer-bottom">
+                <p>&copy; The 3TN-News. Quyền sở hữu trí tuệ đã được bảo lưu.</p>
             </div>
         </footer>
     );

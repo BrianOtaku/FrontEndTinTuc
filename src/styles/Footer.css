@@ -7,32 +7,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .footer-content 
 {
-    /* border: 1px solid white; */
-    width: 90%;
+    width: 85%;
     display: flex;
     justify-content: space-between;
 }
 
-.footer-column 
+.footer-column.contact 
 {
-    flex: 1;
+    flex: 0 0 30%; /* Đặt chiều rộng cho cột 1 */
     padding: 20px;
     text-align: center;
     position: relative; /* Thêm thuộc tính position để xử lý border-right */
 }
 
-/* .footer-column:not(:last-child) 
+.footer-column 
 {
-    border-right: 1px solid white;
-} */
+    flex: 0 0 70%; /* Đặt chiều rộng cho cột 2 */
+    padding: 20px;
+    text-align: center;
+    position: relative; /* Thêm thuộc tính position để xử lý border-right */
+}
+
+.footer-column::after 
+{
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    height: 90%; /* Đường kẻ dài 85% */
+    width: 1px; /* Độ rộng của đường kẻ */
+    background-color: white;
+    /* transform: translateY(-50%); */
+}
+
+.footer-column:last-child::after 
+{
+    display: none; /* Ẩn đường kẻ cuối cùng */
+}
 
 .footer-column h3 
 {
     text-align: left;
+    margin-left: 10px;
     margin-bottom: 10px;
 }
 
@@ -41,7 +62,16 @@
     margin: 0;
 }
 
-.contact-item
+.footer-bottom 
+{
+    width: 85%;
+    padding-top: 10px;
+    /* padding-bottom: 0px; */
+    text-align: center;
+    border-top: 2px solid #ffffff; /* Đường kẻ trên hàng mới */
+}
+
+.contact-item 
 {
     padding-left: 15vh;
     display: flex;
@@ -64,4 +94,3 @@ a:hover
 {
     text-decoration: underline;
 }
-
