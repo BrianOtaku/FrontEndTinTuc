@@ -9,19 +9,19 @@ function Footer() {
                 <div className="footer-column contact">
                     <h3>Liên Hệ:</h3>
                     <div className="contact-item">
-                        <FontAwesomeIcon icon={faFacebookSquare} className='icon' />
+                        <FontAwesomeIcon icon={faFacebookSquare} className='footer-icon' />
                         <a href="https://www.facebook.com/bao.nguyentam.585/" target="_blank" rel="noopener noreferrer">
                             Nguyễn Tâm Bảo
                         </a>
                     </div>
                     <div className="contact-item">
-                        <FontAwesomeIcon icon={faFacebookSquare} className='icon' />
+                        <FontAwesomeIcon icon={faFacebookSquare} className='footer-icon' />
                         <a href="https://www.facebook.com/Raycrop" target="_blank" rel="noopener noreferrer">
                             Nguyễn Quốc Khánh
                         </a>
                     </div>
                     <div className="contact-item">
-                        <FontAwesomeIcon icon={faFacebookSquare} className='icon' />
+                        <FontAwesomeIcon icon={faFacebookSquare} className='footer-icon' />
                         <a href="https://www.facebook.com/profile.php?id=100012529452762&locale=vi_VN" target="_blank" rel="noopener noreferrer">
                             Nguyễn Phúc Đỉnh
                         </a>
@@ -33,7 +33,7 @@ function Footer() {
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>&copy; The 3TN-News. Quyền sở hữu trí tuệ đã được bảo lưu.</p>
+                <p>&copy; The 3TN-News. Quyền sở hữu trí tuệ được bảo lưu.</p>
             </div>
         </footer>
     );

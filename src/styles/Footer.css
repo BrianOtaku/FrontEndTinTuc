@@ -14,7 +14,7 @@
 {
     width: 85%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .footer-column.contact 
@@ -76,12 +76,14 @@
     padding-left: 15vh;
     display: flex;
     align-items: center;
+    font-size: 17px;
     gap: 5px;
 }
 
-.icon 
+.footer-icon 
 {
     margin-right: 10px;
+    font-size: 20px;
 }
 
 a 

@@ -1,12 +1,7 @@
-import React from 'react';
+import NewsPage from '../API/newsPage';
 
-const AnotherAction: React.FC = () => {
-    return (
-        <div>
-            <h1>AnotherAction Page</h1>
-            <p>This is the AnotherAction page content.</p>
-        </div>
-    );
-}
+const Populace: React.FC = () => {
+    return <NewsPage type="dan-sinh" />;
+};
 
-export default AnotherAction;
+export default Populace;

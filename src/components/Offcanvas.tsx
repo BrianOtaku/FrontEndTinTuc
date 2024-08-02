@@ -13,7 +13,7 @@ const OffcanvasComponent: React.FC = () => {
         <>
             <div className='hidden-container'>
                 <Button variant="outline-dark" onClick={handleShow} className='hiddenside'>
-                    <FontAwesomeIcon icon={faBars} className='icon' />
+                    <FontAwesomeIcon icon={faBars} className='offcanvas-icon' />
                 </Button>
                 <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true} backdrop={true}>
                     <Offcanvas.Header closeButton>

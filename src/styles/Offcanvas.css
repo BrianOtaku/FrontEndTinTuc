@@ -26,9 +26,10 @@
     height: 100%;
 }
 
-.icon
+.offcanvas-icon
 {
-    padding: 0px auto;
+    /* padding: 0px auto; */
+    margin: auto;
     font-size: 26px;
 }
   

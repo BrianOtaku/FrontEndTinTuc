@@ -1,12 +1,7 @@
-import React from 'react';
+import NewsPage from '../API/newsPage';
 
-const Something: React.FC = () => {
-    return (
-        <div>
-            <h1>Something Page</h1>
-            <p>This is the something page content.</p>
-        </div>
-    );
-}
+const Labour: React.FC = () => {
+    return <NewsPage type="lao-dong-viec-lam" />;
+};
 
-export default Something;
+export default Labour;

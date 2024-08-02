@@ -1,14 +1,7 @@
-import React from 'react';
-import Image from 'react-bootstrap/Image';
+import NewsPage from '../API/newsPage';
 
-const Action: React.FC = () => {
-    return (
-        <div>
-            <h1>Action Page</h1>
-            <p>this is Action page content.</p>
-            <Image src="./images/banner-10.png" fluid />
-        </div>
-    );
-}
+const Political: React.FC = () => {
+    return <NewsPage type="chinh-tri" />;
+};
 
-export default Action;
+export default Political;

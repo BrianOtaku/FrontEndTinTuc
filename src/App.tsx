@@ -24,6 +24,7 @@ import './styles/Offcanvas.css';
 import './styles/Home.css';
 import './styles/SignIn.css';
 import './styles/SignUp.css';
+import './styles/formNews.css';
 
 function App() {
   return (

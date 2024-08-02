@@ -1,12 +1,7 @@
-import React from 'react';
+import NewsPage from '../API/newsPage';
 
-const SeparatedLink: React.FC = () => {
-    return (
-        <div>
-            <h1>Link Page</h1>
-            <p>This is the Link page content.</p>
-        </div>
-    );
-}
+const Transport: React.FC = () => {
+    return <NewsPage type="giao-thong" />;
+};
 
-export default SeparatedLink;
+export default Transport;
