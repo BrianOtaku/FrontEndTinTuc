@@ -1,0 +1,23 @@
+.load-more 
+{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.load-more-button 
+{
+    padding: 10px;
+    font-size: 3vh;
+    border: none;
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.15s ease;
+}
+
+.load-more-button:hover 
+{
+    background-color: #9b9b9b;
+    color: rgb(0, 0, 0);
+}

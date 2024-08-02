@@ -19,12 +19,13 @@ import './styles/Navbar.css';
 import './styles/Footer.css';
 import './styles/WebForm.css';
 import './styles/Offcanvas.css';
+import './styles/formNews.css';
+import './styles/loadMoreButton.css'
 
 // import css trang
 import './styles/Home.css';
 import './styles/SignIn.css';
 import './styles/SignUp.css';
-import './styles/formNews.css';
 
 function App() {
   return (

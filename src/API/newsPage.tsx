@@ -52,30 +52,30 @@ const NewsPage: React.FC<Props> = ({ type }) => {
         <Container className="news-page">
             <div>
                 {/* Danh sách dữ liệu */}
-                <ul className="news-list">
+                <div className="news-list">
                     {currentItems.map((data) => (
-                        <li key={data.id} className="news-item">
+                        <div key={data.id} className="gap-between-item">
                             <h2 className="news-title" onClick={() => handleTitleClick(data.id)}>{data.title}</h2>
                             <a href={data.linkDetail} target="_blank" rel="noopener noreferrer" className="news-link">
                                 <img src={data.imageUrl} alt={data.title} className="news-image" />
                             </a>
                             <p className="news-description">{data.description}</p>
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
 
                 {/* Vùng hiển thị nội dung của mục tin tức */}
-                {selectedNewsId && (
+                {/* {selectedNewsId && (
                     <div className="news-content">
                         {dataList.find((data) => data.id === selectedNewsId)?.content}
                     </div>
-                )}
+                )} */}
 
                 {/* Nút Load More */}
                 {currentItems.length < dataList.length && (
                     <div className="load-more">
                         <button onClick={loadMore} className="load-more-button">
-                            Load More
+                            Hiển thị thêm
                         </button>
                     </div>
                 )}
