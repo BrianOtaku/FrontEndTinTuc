@@ -1,13 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { decodeToken } from '../API/axiosConfig';
+import { getAccountById } from '../API/apiAccount';
 
 const OffcanvasComponent: React.FC = () => {
     const [show, setShow] = useState(false);
+    const [accountData, setAccountData] = useState<any>(null); // Thay đổi kiểu dữ liệu tùy thuộc vào cấu trúc Account
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decoded = decodeToken(token);
+            if (decoded && decoded.unique_name) {
+                const userId = decoded.unique_name;
+                if (typeof userId === 'string') {
+                    getData(userId, token);
+                }
+            }
+        }
+    }, []);
+
+    const getData = async (id: string, token: string) => {
+        try {
+            const accountData = await getAccountById(id, token);
+            setAccountData(accountData);
+            localStorage.setItem('name', accountData?.name ?? ''); // Đảm bảo giá trị không phải là undefined
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
+        window.location.reload();
+    }
 
     return (
         <>
@@ -17,10 +49,21 @@ const OffcanvasComponent: React.FC = () => {
                 </Button>
                 <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true} backdrop={true}>
                     <Offcanvas.Header closeButton>
-                        <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                        <FontAwesomeIcon icon={faUser} style={{ fontSize: '1.5rem' }} />
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        Some content for the offcanvas goes here.
+                        {accountData ? (
+                            <div>
+                                <p><strong>ID:</strong> {accountData.id}</p>
+                                <p><strong>Email:</strong> {accountData.email}</p>
+                                <p><strong>Name:</strong> {accountData.name}</p>
+                                <Button variant="danger" onClick={handleLogout}>
+                                    <FontAwesomeIcon icon={faSignOutAlt} /> Đăng xuất
+                                </Button>
+                            </div>
+                        ) : (
+                            <p>Loading account data...</p>
+                        )}
                     </Offcanvas.Body>
                 </Offcanvas>
             </div>

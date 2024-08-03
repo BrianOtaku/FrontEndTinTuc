@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import {AxiosInstance} from '../API/axiosConfig'; // đảm bảo bạn đã cấu hình AxiosInstance
+import { login } from '../API/apiAccount'; // giả sử hàm login đã được lưu trong file loginService.ts
+
+interface Login {
+    email: string;
+    password: string;
+}
 
 const SignIn: React.FC = () => {
     const [identifier, setIdentifier] = useState<string>('');
@@ -9,7 +16,7 @@ const SignIn: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         if (!identifier || !password) {
@@ -17,9 +24,25 @@ const SignIn: React.FC = () => {
             return;
         }
 
-        console.log('Identifier (Email/Username):', identifier);
-        console.log('Password:', password);
-        setErrorMessage('');
+        try {
+            const token = await login({ email: identifier, password });
+            if (token) {
+                console.log('Login successful:', token);
+                localStorage.setItem('token', token.toString())
+                setErrorMessage('');
+                alert('Đăng nhập thành công');
+               
+               window.location.href = '/';
+               
+              
+               
+            } else {
+                setErrorMessage('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại sau.');
+        }
     };
 
     const toggleShowPassword = () => {

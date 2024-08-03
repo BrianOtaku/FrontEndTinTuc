@@ -1,60 +1,106 @@
-import React, { useState } from 'react';
-import { Form, Button, ListGroup, Container } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import * as signalR from '@microsoft/signalr';
+import { Trigger } from '../trigger/trigger';
 
-interface Comment {
-    username: string;
-    text: string;
+interface Message {
+    user: string;
+    message: string;
 }
 
 const CommentSection: React.FC = () => {
-    const [comments, setComments] = useState<Comment[]>([]);
-    const [username, setUsername] = useState<string>('');
-    const [comment, setComment] = useState<string>('');
+   
+    const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [message, setMessage] = useState('');
+    const [username, setUsername] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-    const handleCommentSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (username && comment) {
-            setComments([...comments, { username, text: comment }]);
-            setUsername('');
-            setComment('');
+    useEffect(() => {
+        
+        const token = localStorage.getItem('token');
+        if (!token) {
+            setIsLoggedIn(false);
+            return;
+        }
+
+        // Retrieve username from localStorage
+        const storedUsername = localStorage.getItem('name') || '';
+        setUsername(storedUsername);
+
+        const connect = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7161/chathub")
+            .withAutomaticReconnect()
+            .build();
+    
+        setConnection(connect);
+    
+        const startConnection = async () => {
+            try {
+                await connect.start();
+                console.log("Connected!");
+    
+                connect.on("ReceiveMessage", (user: string, message: string) => {
+                    setMessages(messages => [...messages, { user, message }]);
+                });
+            } catch (e) {
+                console.log('Connection failed: ', e);
+            }
+        };
+    
+        startConnection();
+    
+        return () => {
+            connect.off("ReceiveMessage");
+            connect.stop();
+        };
+    }, []);
+
+    const sendMessage = async () => {
+        if (connection && connection.state === signalR.HubConnectionState.Connected) {
+            try {
+                await connection.send('SendMessage', username, message);
+                setMessage('');
+            } catch (e) {
+                console.log(e);
+            }
+        } else {
+            alert('No connection to server yet.');
         }
     };
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    };
+
+    if (!isLoggedIn) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+                <p>Bạn cần đăng nhập để có thể nhắn tin</p>
+            </div>
+        );
+    }
+
     return (
-        <Container className="comment-section">
-            <h2>Comments</h2>
-            <Form onSubmit={handleCommentSubmit}>
-                <Form.Group controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter your name"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formComment">
-                    <Form.Label>Comment</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        placeholder="Enter your comment"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                    />
-                </Form.Group>
-                <Button variant="outline-dark" type="submit" className="mt-2">
-                    Submit
-                </Button>
-            </Form>
-            <ListGroup className="mt-3">
-                {comments.map((comment, index) => (
-                    <ListGroup.Item key={index}>
-                        <strong>{comment.username}</strong>: {comment.text}
-                    </ListGroup.Item>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '50vh' }}>
+            <div style={{ flex: 1, overflowY: 'auto' }}>
+                {messages.map((m, index) => (
+                    <div key={index}><strong>{m.user}</strong>: {m.message}</div>
                 ))}
-            </ListGroup>
-        </Container>
+            </div>
+            <div style={{ padding: '10px', borderTop: '1px solid #ccc' }}>
+                <input 
+                    type="text" 
+                    placeholder="Message" 
+                    value={message} 
+                    onChange={e => setMessage(e.target.value)} 
+                    onKeyPress={handleKeyPress}
+                    style={{ width: '100%' }}
+                />
+                <button onClick={sendMessage} style={{ display: 'block', marginTop: '10px', width: '100%' }}>Send</button>
+            </div>
+        </div>
     );
 };
 

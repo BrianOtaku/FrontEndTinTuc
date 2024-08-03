@@ -1,10 +1,24 @@
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 
-const AxiosInstance = axios.create({
+export const AxiosInstance = axios.create({
   baseURL: 'https://localhost:7161/api/',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-export default AxiosInstance;
+interface DecodedToken {
+  exp: number;
+  iat: number;
+  [key: string]: any;
+}
+
+export const decodeToken = (token: string): DecodedToken | null => {
+  try {
+    return jwtDecode<DecodedToken>(token);
+  } catch (error) {
+    console.error('Invalid token:', error);
+    return null;
+  }
+};

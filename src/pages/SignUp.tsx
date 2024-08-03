@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, InputGroup, FormControl, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Register } from '../API/apiAccount'; // Adjust the import path based on your project structure
 
 const SignUp: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -13,7 +14,7 @@ const SignUp: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         if (!email || !username || !password || !confirmPassword) {
@@ -27,7 +28,20 @@ const SignUp: React.FC = () => {
         }
 
         setErrorMessage('');
-        setShowModal(true);
+
+        const registerData = { email, password, name: username, roles:"User" };
+
+        try {
+            const response = await Register(registerData);
+            if (response) {
+                setShowModal(true);
+            } else {
+                setErrorMessage("Đăng ký không thành công, xin vui lòng thử lại.");
+            }
+        } catch (error) {
+            console.error("Đăng ký thất bại:", error);
+            setErrorMessage("Đã có lỗi xảy ra, xin vui lòng thử lại.");
+        }
     };
 
     const toggleShowPassword = () => {

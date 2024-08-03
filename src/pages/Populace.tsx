@@ -1,4 +1,4 @@
-import NewsPage from '../API/newsPage';
+import NewsPage from '../template/newsPage';
 
 const Populace: React.FC = () => {
     return <NewsPage type="dan-sinh" />;

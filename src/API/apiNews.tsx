@@ -1,4 +1,4 @@
-import AxiosInstance from './axiosConfig';
+import {AxiosInstance} from './axiosConfig';
 
 interface Data {
     id: number;
@@ -12,7 +12,7 @@ interface Data {
 // FETCH BY TYPE
 export const fetchNewsByType = async (type: string): Promise<Data[]> => {
     try {
-        const response = await AxiosInstance.get(`/News?type=${type}`);
+        const response = await AxiosInstance.get(`/News/type/${type}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching news by type:', error);

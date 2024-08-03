@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Taskbar() {
+    const token = localStorage.getItem('token')
     return (
         <Navbar expand="lg" className="bg-gray">
             <Container>
@@ -28,9 +29,11 @@ function Taskbar() {
                         </NavDropdown>
                     </Nav>
                     <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/login">
-                            <Button variant="outline-dark">Đăng Nhập</Button>
-                        </Nav.Link>
+                    {!token && (
+                            <Nav.Link as={Link} to="/login">
+                                <Button variant="outline-dark">Đăng Nhập</Button>
+                            </Nav.Link>
+                        )}
                     </Nav>
                     <Form className="d-flex">
                         <FormControl
