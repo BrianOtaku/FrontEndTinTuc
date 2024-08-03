@@ -12,7 +12,9 @@ const CommentSection: React.FC = () => {
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(true);
+    
 
+  
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {

@@ -18,7 +18,7 @@
 
 .logo
 {
-  font-size: 10vh;
+  font-size: 7vh;
   text-align: center;
   background: linear-gradient(90deg, #737373, #1c1c1c, rgb(98, 98, 98), rgb(32, 32, 32));
   -webkit-background-clip: text;

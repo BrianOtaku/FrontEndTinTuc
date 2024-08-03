@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, InputGroup, FormControl, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { Register } from '../API/apiAccount'; // Adjust the import path based on your project structure
+import { register } from '../API/apiAccount'; // Adjust the import path based on your project structure
 
 const SignUp: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -32,7 +32,7 @@ const SignUp: React.FC = () => {
         const registerData = { email, password, name: username, roles:"User" };
 
         try {
-            const response = await Register(registerData);
+            const response = await register(registerData);
             if (response) {
                 setShowModal(true);
             } else {
