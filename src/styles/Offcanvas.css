@@ -58,6 +58,12 @@
     font-size: 17px;
 }
 
+.sign-out-button:hover
+{
+    color: black;
+    background-color: white;
+}
+
 .sign-out-icon
 {
     margin-right: 7px;

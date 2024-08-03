@@ -1,4 +1,4 @@
-import {AxiosInstance} from './axiosConfig';
+import { AxiosInstance } from './axiosConfig';
 
 interface Data {
     id: number;
@@ -32,6 +32,7 @@ export const fetchNews = async (): Promise<Data[]> => {
     }
 };
 
+// FETCH SEARCH
 export const searchNews = async (title: string): Promise<Data[]> => {
     try {
         const response = await AxiosInstance.get('/News/search', {

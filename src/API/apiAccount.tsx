@@ -52,8 +52,8 @@ export const getAccountById = async (id: string, token: string): Promise<Account
             const status = error.response.status;
             const message = error.response.data;
 
-            if (status === 401) { // Kiểm tra mã phản hồi 401
-                if (message === 'TokenExpired') { // Kiểm tra thông báo lỗi từ server
+            if (status === 401) {
+                if (message === 'TokenExpired') {
                     // eslint-disable-next-line no-restricted-globals
                     const userConfirmed = confirm("Token đã hết hạn. Vui lòng đăng nhập lại.");
                     if (userConfirmed) {

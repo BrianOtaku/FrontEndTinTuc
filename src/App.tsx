@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn';
 import OffcanvasComponent from './components/Offcanvas';
 import NewsDetail from './template/newsDetail';
 import NewsDetailByType from './template/newsDetailByType';
+import SearchResults from './template/searchResults';
 
 // import css bo cuc
 import './styles/WebForm.css';
@@ -52,6 +53,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/news/:id" element={<NewsDetail />} />
               <Route path="/news-detail-by-type/:type/:id" element={<NewsDetailByType />} />
+              <Route path="/search-results" element={<SearchResults />} />
             </Routes>
           </div>
         </div>

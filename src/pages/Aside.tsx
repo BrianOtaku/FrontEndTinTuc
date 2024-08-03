@@ -4,7 +4,8 @@ import CommentSection from '../components/CommentSection';
 const Aside: React.FC = () => {
     return (
         <div>
-            <h2>Forum</h2>
+            <h2>Diễn Đàn</h2>
+            <br />
             <CommentSection />
         </div>
     );

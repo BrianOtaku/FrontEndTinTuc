@@ -9,7 +9,7 @@ interface Message {
     message: string;
 }
 
-const CommentSection: React.FC = () => {
+const CommentForPage: React.FC = () => {
     const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState('');
@@ -28,45 +28,45 @@ const CommentSection: React.FC = () => {
         const storedUsername = localStorage.getItem('name') || '';
         setUsername(storedUsername);
 
-        const connect = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:7161/chathub")
-            .withAutomaticReconnect()
-            .build();
+        // const connect = new signalR.HubConnectionBuilder()
+        //     .withUrl("https://localhost:7161/chathub")
+        //     .withAutomaticReconnect()
+        //     .build();
 
-        setConnection(connect);
+        // setConnection(connect);
 
-        const startConnection = async () => {
-            try {
-                await connect.start();
-                console.log("Connected!");
+        // const startConnection = async () => {
+        //     try {
+        //         await connect.start();
+        //         console.log("Connected!");
 
-                connect.on("ReceiveMessage", (user: string, message: string) => {
-                    setMessages(messages => [...messages, { user, message }]);
-                });
-            } catch (e) {
-                console.log('Connection failed: ', e);
-            }
-        };
+        //         connect.on("ReceiveMessage", (user: string, message: string) => {
+        //             setMessages(messages => [...messages, { user, message }]);
+        //         });
+        //     } catch (e) {
+        //         console.log('Connection failed: ', e);
+        //     }
+        // };
 
-        startConnection();
+        // startConnection();
 
-        return () => {
-            connect.off("ReceiveMessage");
-            connect.stop();
-        };
+        // return () => {
+        //     connect.off("ReceiveMessage");
+        //     connect.stop();
+        // };
     }, []);
 
     const sendMessage = async () => {
-        if (connection && connection.state === signalR.HubConnectionState.Connected) {
-            try {
-                await connection.send('SendMessage', username, message);
-                setMessage('');
-            } catch (e) {
-                console.log(e);
-            }
-        } else {
-            alert('No connection to server yet.');
-        }
+        // if (connection && connection.state === signalR.HubConnectionState.Connected) {
+        //     try {
+        //         await connection.send('SendMessage', username, message);
+        //         setMessage('');
+        //     } catch (e) {
+        //         console.log(e);
+        //     }
+        // } else {
+        //     alert('No connection to server yet.');
+        // }
     };
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -111,4 +111,4 @@ const CommentSection: React.FC = () => {
     );
 };
 
-export default CommentSection;
+export default CommentForPage;

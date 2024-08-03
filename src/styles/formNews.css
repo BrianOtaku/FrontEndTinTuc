@@ -78,11 +78,11 @@
     text-decoration: underline 1px;
 }
 
-.news-link 
+/* .news-link 
 {
     display: block;
     margin-bottom: 10px;
-}
+} */
 
 .news-image 
 {
@@ -96,3 +96,14 @@
     font-size: 1em;
     margin-bottom: 10px;
 }
+
+.search-results-sentence
+{
+    height: auto;
+    padding: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    /* border: 1px solid black; */
+}
+
+

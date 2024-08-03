@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { fetchNewsByType } from '../API/apiNews';
 import Aside from '../pages/Aside';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import CommentSection from '../components/CommentSection';
 
 interface Data {
     id: number;
@@ -19,7 +20,7 @@ interface Props {
 
 const NewsPage: React.FC<Props> = ({ type }) => {
     const [dataList, setDataList] = useState<Data[]>([]);
-    const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
+    // const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
     const [currentItems, setCurrentItems] = useState<Data[]>([]);
     const [itemsPerPage] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
@@ -55,19 +56,21 @@ const NewsPage: React.FC<Props> = ({ type }) => {
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">
-                            <div className="news-item" onClick={() => handleItemClick(data.id)}>
+                            <div onClick={() => handleItemClick(data.id)}>
                                 <h2 className="news-title">{data.title}</h2>
                                 <img src={data.imageUrl} alt={data.title} className="news-image" />
                                 <p className="news-description">{data.description}</p>
+
                                 {/* Vùng hiển thị nội dung của mục tin tức */}
-                                {selectedNewsId === data.id && (
+                                {/* {selectedNewsId === data.id && (
                                     <div className="news-content">
                                         <h3>{data.title}</h3>
                                         <img src={data.imageUrl} alt={data.title} className="news-image" />
                                         <p>{data.description}</p>
-                                        <div dangerouslySetInnerHTML={{ __html: data.content }} /> {/* Nếu nội dung có HTML */}
+                                        <div dangerouslySetInnerHTML={{ __html: data.content }} />
                                     </div>
-                                )}
+                                )} */}
+
                             </div>
                         </div>
                     ))}

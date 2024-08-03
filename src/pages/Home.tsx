@@ -45,9 +45,9 @@ const Home: React.FC = () => {
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">
-                            <div className="news-item" onClick={() => window.location.href = `/News/${data.id}`}>
+                            <div onClick={() => window.location.href = `/News/${data.id}`}>
                                 <h2 className="news-title">{data.title}</h2>
-                                <a href={data.linkDetail} target="_blank" rel="noopener noreferrer" className="news-link">
+                                <a href={data.linkDetail} target="_blank" rel="noopener noreferrer">
                                     <img src={data.imageUrl} alt={data.title} className="news-image" />
                                 </a>
                                 <p className="news-description">{data.description}</p>
