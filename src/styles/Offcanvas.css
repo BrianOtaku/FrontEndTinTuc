@@ -7,6 +7,17 @@
     top: 0;
     z-index: 5;
 }
+
+.offcanvas-custom 
+{
+    color: white;
+    background: linear-gradient(60deg, #1c1c1c, #737373, rgb(98, 98, 98), rgb(32, 32, 32));
+}
+
+.offcanvas-custom .btn-close
+{
+    color: white;
+}
   
 .hidden-container 
 {
@@ -20,7 +31,7 @@
 {
     box-shadow: -10px 0px 5px rgba(0, 0, 0, 0.05), 10px 0px 5px rgba(0, 0, 0, 0.05);
     border: 0px;
-    background-color: #8e8d8d;
+    background-color: #777777;
     float: inline-end;
     width: 10vh;
     height: 100%;
@@ -32,4 +43,28 @@
     margin: auto;
     font-size: 26px;
 }
-  
+
+.user-icon
+{
+    font-size: 50px;
+}
+
+.sign-out-button
+{
+    border: 0px;
+    background-color: #1c1c1c;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+}
+
+.sign-out-icon
+{
+    margin-right: 7px;
+}
+
+.info
+{
+    font-size: larger;
+}
+

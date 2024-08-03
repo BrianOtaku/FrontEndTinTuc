@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { decodeToken } from '../API/axiosConfig';
 import { getAccountById } from '../API/apiAccount';
 
@@ -47,18 +47,18 @@ const OffcanvasComponent: React.FC = () => {
                 <Button variant="outline-dark" onClick={handleShow} className='hiddenside'>
                     <FontAwesomeIcon icon={faBars} className='offcanvas-icon' />
                 </Button>
-                <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true} backdrop={true}>
-                    <Offcanvas.Header closeButton>
-                        <FontAwesomeIcon icon={faUser} style={{ fontSize: '1.5rem' }} />
+                <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true} backdrop={true} className='offcanvas-custom'>
+                    <Offcanvas.Header closeButton closeVariant='white'>
+                        <FontAwesomeIcon icon={faUserCircle} aria-hidden="true" className='user-icon' />
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         {accountData ? (
-                            <div>
+                            <div className='info'>
                                 <p><strong>ID:</strong> {accountData.id}</p>
                                 <p><strong>Email:</strong> {accountData.email}</p>
                                 <p><strong>Name:</strong> {accountData.name}</p>
-                                <Button variant="danger" onClick={handleLogout}>
-                                    <FontAwesomeIcon icon={faSignOutAlt} /> Đăng xuất
+                                <Button variant="danger" onClick={handleLogout} className='sign-out-button'>
+                                    <FontAwesomeIcon icon={faSignOutAlt} className='sign-out-icon' />Đăng xuất
                                 </Button>
                             </div>
                         ) : (

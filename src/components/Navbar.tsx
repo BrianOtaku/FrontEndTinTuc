@@ -22,14 +22,14 @@ function Taskbar() {
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/" >Trang Chủ</Nav.Link>
                         <NavDropdown title="Thể Loại" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/action">Chính trị</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/another-action">Dân sinh</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/something">Lao động việc làm</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/separated-link">Giao thông</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/political">Chính trị</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/populace">Dân sinh</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/labour">Lao động việc làm</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/transport">Giao thông</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav className="mr-auto">
-                    {!token && (
+                        {!token && (
                             <Nav.Link as={Link} to="/login">
                                 <Button variant="outline-dark">Đăng Nhập</Button>
                             </Nav.Link>

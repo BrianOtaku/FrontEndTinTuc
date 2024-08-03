@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import {AxiosInstance} from '../API/axiosConfig'; // đảm bảo bạn đã cấu hình AxiosInstance
-import { login } from '../API/apiAccount'; // giả sử hàm login đã được lưu trong file loginService.ts
+import { AxiosInstance } from '../API/axiosConfig';
+import { login } from '../API/apiAccount';
 
 interface Login {
     email: string;
@@ -31,11 +31,11 @@ const SignIn: React.FC = () => {
                 localStorage.setItem('token', token.toString())
                 setErrorMessage('');
                 alert('Đăng nhập thành công');
-               
-               window.location.href = '/';
-               
-              
-               
+
+                window.location.href = '/';
+
+
+
             } else {
                 setErrorMessage('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
             }
@@ -55,10 +55,10 @@ const SignIn: React.FC = () => {
             <div>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formIdentifier">
-                        <Form.Label>Email hoặc Tên người dùng:</Form.Label>
+                        <Form.Label>Email:</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Nhập email/Tên người dùng"
+                            placeholder="Nhập email"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
                         />

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { fetchNewsByType } from '../API/apiNews';
+import Aside from '../pages/Aside';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 interface Data {
     id: number;
@@ -21,6 +23,7 @@ const NewsPage: React.FC<Props> = ({ type }) => {
     const [currentItems, setCurrentItems] = useState<Data[]>([]);
     const [itemsPerPage] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate(); // Initialize useNavigate
 
     useEffect(() => {
         const getData = async () => {
@@ -30,14 +33,11 @@ const NewsPage: React.FC<Props> = ({ type }) => {
         };
 
         getData();
-    }, [type, itemsPerPage]); // Thêm itemsPerPage vào mảng phụ thuộc
+    }, [type, itemsPerPage]);
 
-    const handleTitleClick = (id: number) => {
-        if (selectedNewsId === id) {
-            setSelectedNewsId(null);
-        } else {
-            setSelectedNewsId(id);
-        }
+    const handleItemClick = (id: number) => {
+        // Điều hướng đến trang chi tiết tin tức
+        navigate(`/news/${id}`);
     };
 
     const loadMore = () => {
@@ -49,27 +49,29 @@ const NewsPage: React.FC<Props> = ({ type }) => {
     };
 
     return (
-        <Container className="news-page">
-            <div>
-                {/* Danh sách dữ liệu */}
+        <Container className="home">
+            {/* Danh sách dữ liệu */}
+            <div className="homeandaside">
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">
-                            <h2 className="news-title" onClick={() => handleTitleClick(data.id)}>{data.title}</h2>
-                            <a href={data.linkDetail} target="_blank" rel="noopener noreferrer" className="news-link">
+                            <div className="news-item" onClick={() => handleItemClick(data.id)}>
+                                <h2 className="news-title">{data.title}</h2>
                                 <img src={data.imageUrl} alt={data.title} className="news-image" />
-                            </a>
-                            <p className="news-description">{data.description}</p>
+                                <p className="news-description">{data.description}</p>
+                                {/* Vùng hiển thị nội dung của mục tin tức */}
+                                {selectedNewsId === data.id && (
+                                    <div className="news-content">
+                                        <h3>{data.title}</h3>
+                                        <img src={data.imageUrl} alt={data.title} className="news-image" />
+                                        <p>{data.description}</p>
+                                        <div dangerouslySetInnerHTML={{ __html: data.content }} /> {/* Nếu nội dung có HTML */}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
-
-                {/* Vùng hiển thị nội dung của mục tin tức */}
-                {/* {selectedNewsId && (
-                    <div className="news-content">
-                        {dataList.find((data) => data.id === selectedNewsId)?.content}
-                    </div>
-                )} */}
 
                 {/* Nút Load More */}
                 {currentItems.length < dataList.length && (
@@ -79,6 +81,11 @@ const NewsPage: React.FC<Props> = ({ type }) => {
                         </button>
                     </div>
                 )}
+            </div>
+
+            {/* Thẻ aside */}
+            <div className="side-content">
+                <Aside />
             </div>
         </Container>
     );

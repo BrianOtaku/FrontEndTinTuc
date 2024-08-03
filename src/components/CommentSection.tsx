@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
-import { Trigger } from '../trigger/trigger';
 
 interface Message {
     user: string;
@@ -8,7 +7,6 @@ interface Message {
 }
 
 const CommentSection: React.FC = () => {
-   
     const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [message, setMessage] = useState('');
@@ -16,14 +14,12 @@ const CommentSection: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     useEffect(() => {
-        
         const token = localStorage.getItem('token');
         if (!token) {
             setIsLoggedIn(false);
             return;
         }
 
-        // Retrieve username from localStorage
         const storedUsername = localStorage.getItem('name') || '';
         setUsername(storedUsername);
 
@@ -31,14 +27,14 @@ const CommentSection: React.FC = () => {
             .withUrl("https://localhost:7161/chathub")
             .withAutomaticReconnect()
             .build();
-    
+
         setConnection(connect);
-    
+
         const startConnection = async () => {
             try {
                 await connect.start();
                 console.log("Connected!");
-    
+
                 connect.on("ReceiveMessage", (user: string, message: string) => {
                     setMessages(messages => [...messages, { user, message }]);
                 });
@@ -46,9 +42,9 @@ const CommentSection: React.FC = () => {
                 console.log('Connection failed: ', e);
             }
         };
-    
+
         startConnection();
-    
+
         return () => {
             connect.off("ReceiveMessage");
             connect.stop();
@@ -76,29 +72,32 @@ const CommentSection: React.FC = () => {
 
     if (!isLoggedIn) {
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+            <div className="login-prompt">
                 <p>Bạn cần đăng nhập để có thể nhắn tin</p>
             </div>
         );
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '50vh' }}>
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+        <div className="comment-section">
+            <div className="messages-container">
                 {messages.map((m, index) => (
-                    <div key={index}><strong>{m.user}</strong>: {m.message}</div>
+                    <div key={index} className="message">
+                        <strong>{m.user}</strong>: {m.message}
+                    </div>
                 ))}
             </div>
-            <div style={{ padding: '10px', borderTop: '1px solid #ccc' }}>
-                <input 
-                    type="text" 
-                    placeholder="Message" 
-                    value={message} 
-                    onChange={e => setMessage(e.target.value)} 
+            <div className="input-container">
+                <input
+                    type="text"
+                    placeholder="Message"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    style={{ width: '100%' }}
                 />
-                <button onClick={sendMessage} style={{ display: 'block', marginTop: '10px', width: '100%' }}>Send</button>
+                <button onClick={sendMessage} className="send-button">
+                    Send
+                </button>
             </div>
         </div>
     );
