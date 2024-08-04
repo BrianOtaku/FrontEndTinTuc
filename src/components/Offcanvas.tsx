@@ -64,7 +64,10 @@ const OffcanvasComponent: React.FC = () => {
                                 </Button>
                             </div>
                         ) : (
-                            <p>Loading account data...</p>
+                            <div>
+                                <h3>Oops!...</h3>
+                                <p>Bạn chưa đăng nhập.</p>
+                            </div>
                         )}
                     </Offcanvas.Body>
                 </Offcanvas>

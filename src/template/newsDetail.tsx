@@ -38,9 +38,8 @@ const NewsDetail: React.FC = () => {
                     <img src={newsItem.imageUrl} alt={newsItem.title} />
                     <p>{newsItem.description}</p>
                     <div dangerouslySetInnerHTML={{ __html: newsItem.content }} /> {/* Nếu nội dung có HTML */}
-                    <br />
                     <div>
-                    <CommentForPage newsId={id!} /> 
+                        <CommentForPage newsId={id!} />
                     </div>
                 </>
             ) : (

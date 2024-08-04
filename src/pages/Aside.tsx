@@ -5,7 +5,6 @@ const Aside: React.FC = () => {
     return (
         <div>
             <h2>Diễn Đàn</h2>
-            <br />
             <CommentSection />
         </div>
     );

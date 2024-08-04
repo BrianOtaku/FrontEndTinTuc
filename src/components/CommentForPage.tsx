@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchComments, addComment, removeComment } from '../API/apiComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
-import '../styles/CommentForPage.css';
+import { faSignInAlt, faReply, faTrashAlt, faComments, faNewspaper, faComment } from '@fortawesome/free-solid-svg-icons';
+import NewsPage from '../template/newsPage';
 
 interface UserReference {
     userId: string;
@@ -32,9 +32,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [showAllMessages, setShowAllMessages] = useState(false);
     const [replyingTo, setReplyingTo] = useState<string | undefined>(undefined);
-    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -114,60 +112,74 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
         setMessage(`@${userName} `);
     };
 
-    const handleShowMoreMessages = () => {
-        setShowAllMessages(true);
-        setExpanded(true);  // Expand the height of the message container
-    };
-
-    const displayedComments = showAllMessages ? comments : comments.slice(0, 5);
-
-    if (!isLoggedIn) {
-        return (
-            <div className="comment-login">
-                <FontAwesomeIcon icon={faSignInAlt} aria-hidden="true" className="icon" />
-                <h5>
-                    Bạn cần đăng nhập để có thể bình luận
-                </h5>
-            </div>
-        );
-    }
-
     return (
-        <div className={`comment-container ${expanded ? 'expanded' : ''}`}>
-            <div className="comment-input">
-                <input
-                    type="text"
-                    placeholder="Bình luận của bạn"
-                    value={message}
-                    onChange={e => setMessage(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                />
-            </div>
-            <div className="comment-list">
-                {displayedComments.map((comment) => (
-                    <div key={comment.id} className="comment">
-                        {comment.comments.map((userComment, index) => (
-                            <div key={index} className={`comment-item ${userComment.toUserId ? 'reply' : ''}`}>
-                                <strong>{userComment.fromUserName}</strong>: {userComment.content}
-                                <div className="comment-actions">
-                                    <button onClick={() => handleReplyToMessage(userComment.fromUserId, userComment.fromUserName || '')}>
-                                        <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
-                                    </button>
-                                    <button onClick={() => handleDeleteMessage(comment.id, userComment.fromUserId, userComment.toUserId || '', userComment.content)}>
-                                        <FontAwesomeIcon icon={faTrash} aria-hidden="true" className="icon-delete" />
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-                {!showAllMessages && comments.length > 5 && (
-                    <div className="show-more">
-                        <button onClick={handleShowMoreMessages}>
-                            Xem thêm
-                        </button>
+        <div className='endContent'>
+            <div className='comment-section-ver2'>
+                <h1>
+                    <FontAwesomeIcon icon={faComment} aria-hidden="true" style={{ marginRight: '10px' }} />
+                    Bình luận:
+                </h1>
+                {!isLoggedIn && (
+                    <div className="login-prompt-v2">
+                        <FontAwesomeIcon icon={faSignInAlt} aria-hidden="true" className='login-prompt-icon' />
+                        <h5>
+                            Bạn cần đăng nhập để có thể bình luận
+                        </h5>
                     </div>
                 )}
+                {isLoggedIn && (
+                    <>
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                placeholder="Bình luận của bạn"
+                                value={message}
+                                onChange={e => setMessage(e.target.value)}
+                                onKeyDown={handleKeyPress}
+                            />
+                            <button onClick={handleSendMessage} className="send-button">
+                                <FontAwesomeIcon icon={faComments} aria-hidden="true" />
+                            </button>
+                        </div>
+                        <div className="messages-container">
+                            {comments.map((comment) => (
+                                <div key={comment.id}>
+                                    {comment.comments.map((userComment, index) => (
+                                        <div key={index} className={`message-ver2 ${userComment.toUserId ? 'reply' : ''}`}>
+                                            <strong>{userComment.fromUserName}</strong>: {userComment.content}
+                                            <div className="comment-actions">
+                                                <button onClick={() => handleReplyToMessage(userComment.fromUserId, userComment.fromUserName || '')}>
+                                                    <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
+                                                </button>
+                                                <button onClick={() => handleDeleteMessage(comment.id, userComment.fromUserId, userComment.toUserId || '', userComment.content)}>
+                                                    <FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" className="icon-delete" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
+            <div className='endContentRight'>
+                <h1>
+                    <FontAwesomeIcon icon={faNewspaper} aria-hidden="true" style={{ marginRight: '10px' }} />
+                    Tin tức khác:
+                </h1>
+                <div className='newsDisplay-gap'>
+                    <NewsPage type='chinh-tri' />
+                </div>
+                <div className='newsDisplay-gap'>
+                    <NewsPage type='giao-thong' />
+                </div>
+                <div className='newsDisplay-gap'>
+                    <NewsPage type='lao-dong-viec-lam' />
+                </div>
+                <div className='newsDisplay-gap'>
+                    <NewsPage type='dan-sinh' />
+                </div>
             </div>
         </div>
     );

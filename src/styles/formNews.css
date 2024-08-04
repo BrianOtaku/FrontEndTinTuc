@@ -27,14 +27,14 @@
     /* border: 1px solid black; */
 }
 
-/* .news-page
+.news-page
 {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     width: 100%;
     padding-right: 0px;
     padding-left: 0px;
-} */
+}
 
 .news-list
 {

@@ -1,85 +1,117 @@
-.comment-container {
-    width: 90%;
-    margin: 20px auto;
+.endContent 
+{
+    /* border: 1px solid black; */
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    border: 1px solid rgb(213, 213, 213);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    height: 400px;
-    overflow: hidden;
-}
-
-.comment-container.expanded {
-    height: auto;
-}
-
-.comment-input {
     display: flex;
-    margin-bottom: 20px;
+    width: 100%;
 }
 
-.comment-input input {
-    flex: 1;
+.endContentRight 
+{
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-.comment-list {
-    max-height: 300px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    width: 65%;
+    margin-left: 15px;
+    height: auto;
+    max-height: 70vh;
     overflow-y: auto;
 }
 
-.comment {
+.newsDisplay-gap
+{
+    margin-bottom: 15px;
+}
+
+.endContentRight h1
+{
+    margin-bottom: 10px;
+}
+
+.login-prompt-v2
+{
+    /* display: flex;
+    justify-content: center; */
+    /* margin: 10px; */
+    border-radius: 10px;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    color:  rgb(72, 72, 72);
+    background-color: white;
+    height: auto;
+    width: auto;
+    text-align: center;
 }
 
-.comment-item {
-    margin-left: 0;
+.comment-section-ver2 
+{
+    /* border: 1px solid black; */
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+    position: relative; /* Đảm bảo các nút có thể được định vị tuyệt đối bên trong */
 }
 
-.comment-item.reply {
+.comment-section-ver2 h1
+{
+    margin: 10px;
+}
+
+.message-ver2 
+{
+    padding: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    border-bottom: 1px dashed rgb(128, 128, 128);
+    border-left: 1px dashed rgb(128, 128, 128);
+    position: relative; /* Để các nút có thể được định vị bên trong tin nhắn */
+    padding-bottom: 30px; /* Khoảng cách dưới để dành chỗ cho các nút */
+}
+
+.message-ver2:not(:last-child) 
+{
+    margin-bottom: 20px;
+}
+
+.message-ver2.reply 
+{
     margin-left: 20px;
 }
 
-.comment-actions {
-    float: right;
+.comment-actions 
+{
+    border-top: 1px dashed gray;
+    /* margin-bottom: 0px; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute; /* Định vị các nút */
+    bottom: 0px;
+    right: 5px; 
 }
 
-.comment-actions button {
-    background: none;
-    border: none;
+.comment-actions button 
+{
+    background-color: inherit;
+    border: 0px;
     cursor: pointer;
-    margin-right: 5px;
+    font-size: 16px;
+    margin-right: 0px;
+    /* border: 1 solid black; */
 }
 
-.icon-reply {
-    color: #007bff;
+.icon-reply 
+{
+    color: rgb(94, 94, 94);
 }
 
-.icon-delete {
-    color: #dc3545;
-}
-
-.comment-login {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.comment-login .icon {
-    font-size: 50px;
-    color: #999;
-}
-
-.show-more {
-    text-align: center;
-    padding: 10px;
-}
-
-.show-more button {
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+.icon-delete 
+{
+    color: rgb(94, 94, 94);
 }

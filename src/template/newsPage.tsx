@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import { fetchNewsByType } from '../API/apiNews';
 import Aside from '../pages/Aside';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import CommentSection from '../components/CommentSection';
 
 interface Data {
     id: number;
@@ -52,7 +51,7 @@ const NewsPage: React.FC<Props> = ({ type }) => {
     return (
         <Container className="home">
             {/* Danh sách dữ liệu */}
-            <div className="homeandaside">
+            <div className="news-page">
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">
@@ -87,9 +86,9 @@ const NewsPage: React.FC<Props> = ({ type }) => {
             </div>
 
             {/* Thẻ aside */}
-            <div className="side-content">
+            {/* <div className="side-content">
                 <Aside />
-            </div>
+            </div> */}
         </Container>
     );
 };

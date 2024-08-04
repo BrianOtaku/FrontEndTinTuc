@@ -27,6 +27,7 @@ import './styles/Footer.css';
 import './styles/Offcanvas.css';
 import './styles/loadMoreButton.css'
 import './styles/Comment.css';
+import './styles/CommentForPage.css';
 
 // import css trang
 import './styles/SignIn.css';
