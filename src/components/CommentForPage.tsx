@@ -1,22 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import * as signalR from '@microsoft/signalr';
+import { fetchComments, addComment, removeComment } from '../API/apiComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments } from '@fortawesome/free-regular-svg-icons';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
+import '../styles/CommentForPage.css';
 
-interface Message {
-    user: string;
-    message: string;
+interface UserReference {
+    userId: string;
+    userName: string;
 }
 
-const CommentForPage: React.FC = () => {
-    const [connection, setConnection] = useState<signalR.HubConnection | null>(null);
-    const [messages, setMessages] = useState<Message[]>([]);
+interface UserCommentDetails {
+    fromUserId: string;
+    toUserId?: string;
+    content: string;
+    createAt: string;
+    fromUserName?: string;
+    toUserName?: string;
+}
+
+interface Comment {
+    id: string;
+    comments: UserCommentDetails[];
+}
+
+interface CommentForPageProps {
+    newsId: string;
+}
+
+const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
+    const [comments, setComments] = useState<Comment[]>([]);
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-
+    const [showAllMessages, setShowAllMessages] = useState(false);
+    const [replyingTo, setReplyingTo] = useState<string | undefined>(undefined);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -28,57 +46,85 @@ const CommentForPage: React.FC = () => {
         const storedUsername = localStorage.getItem('name') || '';
         setUsername(storedUsername);
 
-        // const connect = new signalR.HubConnectionBuilder()
-        //     .withUrl("https://localhost:7161/chathub")
-        //     .withAutomaticReconnect()
-        //     .build();
+        handleFetchComments();
+    }, [newsId]);
 
-        // setConnection(connect);
+    const handleFetchComments = async () => {
+        try {
+            const fetchedComments = await fetchComments(newsId);
+            setComments(fetchedComments);
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    };
 
-        // const startConnection = async () => {
-        //     try {
-        //         await connect.start();
-        //         console.log("Connected!");
+    const handleSendMessage = async () => {
+        if (message.trim() === '') {
+            alert('Bạn cần nhập tin nhắn.');
+            return;
+        }
 
-        //         connect.on("ReceiveMessage", (user: string, message: string) => {
-        //             setMessages(messages => [...messages, { user, message }]);
-        //         });
-        //     } catch (e) {
-        //         console.log('Connection failed: ', e);
-        //     }
-        // };
+        const fromUserId = localStorage.getItem('userId');
+        if (!fromUserId) {
+            alert('User ID not found.');
+            return;
+        }
 
-        // startConnection();
+        const newComment = {
+            newsId: newsId,
+            fromUserId: fromUserId,
+            toUserId: replyingTo || null,
+            content: message
+        };
 
-        // return () => {
-        //     connect.off("ReceiveMessage");
-        //     connect.stop();
-        // };
-    }, []);
-
-    const sendMessage = async () => {
-        // if (connection && connection.state === signalR.HubConnectionState.Connected) {
-        //     try {
-        //         await connection.send('SendMessage', username, message);
-        //         setMessage('');
-        //     } catch (e) {
-        //         console.log(e);
-        //     }
-        // } else {
-        //     alert('No connection to server yet.');
-        // }
+        try {
+            await addComment(newComment);
+            handleFetchComments(); // Refresh the comments list
+            setMessage('');
+            setReplyingTo(undefined);  // Reset replyTo after sending message
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
     };
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            sendMessage();
+            handleSendMessage();
         }
     };
 
+    const handleDeleteMessage = async (newsId: string, fromUserId: string, toUserId: string, content: string) => {
+        const commentPayload = {
+            newsId: newsId,
+            fromUserId: fromUserId,
+            toUserId: toUserId,
+            content: content
+        };
+
+        try {
+            await removeComment(commentPayload);
+            handleFetchComments(); // Refresh the comments list
+        } catch (error) {
+            console.error('Error deleting message:', error);
+        }
+    };
+
+    const handleReplyToMessage = (userId: string, userName: string) => {
+        setReplyingTo(userId);
+        setMessage(`@${userName} `);
+    };
+
+    const handleShowMoreMessages = () => {
+        setShowAllMessages(true);
+        setExpanded(true);  // Expand the height of the message container
+    };
+
+    const displayedComments = showAllMessages ? comments : comments.slice(0, 5);
+
     if (!isLoggedIn) {
         return (
-            <div className="login-prompt">
-                <FontAwesomeIcon icon={faSignInAlt} aria-hidden="true" className='login-prompt-icon' />
+            <div className="comment-login">
+                <FontAwesomeIcon icon={faSignInAlt} aria-hidden="true" className="icon" />
                 <h5>
                     Bạn cần đăng nhập để có thể bình luận
                 </h5>
@@ -87,8 +133,8 @@ const CommentForPage: React.FC = () => {
     }
 
     return (
-        <div className="comment-section">
-            <div className="input-container">
+        <div className={`comment-container ${expanded ? 'expanded' : ''}`}>
+            <div className="comment-input">
                 <input
                     type="text"
                     placeholder="Bình luận của bạn"
@@ -96,16 +142,32 @@ const CommentForPage: React.FC = () => {
                     onChange={e => setMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
                 />
-                <button onClick={sendMessage} className="send-button">
-                    <FontAwesomeIcon icon={faComments} aria-hidden="true" />
-                </button>
             </div>
-            <div className="messages-container">
-                {messages.map((m, index) => (
-                    <div key={index} className="message">
-                        <strong>{m.user}</strong>: {m.message}
+            <div className="comment-list">
+                {displayedComments.map((comment) => (
+                    <div key={comment.id} className="comment">
+                        {comment.comments.map((userComment, index) => (
+                            <div key={index} className={`comment-item ${userComment.toUserId ? 'reply' : ''}`}>
+                                <strong>{userComment.fromUserName}</strong>: {userComment.content}
+                                <div className="comment-actions">
+                                    <button onClick={() => handleReplyToMessage(userComment.fromUserId, userComment.fromUserName || '')}>
+                                        <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
+                                    </button>
+                                    <button onClick={() => handleDeleteMessage(comment.id, userComment.fromUserId, userComment.toUserId || '', userComment.content)}>
+                                        <FontAwesomeIcon icon={faTrash} aria-hidden="true" className="icon-delete" />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 ))}
+                {!showAllMessages && comments.length > 5 && (
+                    <div className="show-more">
+                        <button onClick={handleShowMoreMessages}>
+                            Xem thêm
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );

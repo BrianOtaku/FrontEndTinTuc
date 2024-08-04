@@ -30,6 +30,7 @@ const OffcanvasComponent: React.FC = () => {
             const accountData = await getAccountById(id, token);
             setAccountData(accountData);
             localStorage.setItem('name', accountData?.name ?? ''); // Đảm bảo giá trị không phải là undefined
+            localStorage.setItem('userId', accountData?.id ?? '')
         } catch (error) {
             console.log(error);
         }
@@ -38,6 +39,7 @@ const OffcanvasComponent: React.FC = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('name');
+        localStorage.removeItem('userId')
         window.location.reload();
     }
 

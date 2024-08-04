@@ -40,7 +40,7 @@ const NewsDetail: React.FC = () => {
                     <div dangerouslySetInnerHTML={{ __html: newsItem.content }} /> {/* Nếu nội dung có HTML */}
                     <br />
                     <div>
-                        <CommentForPage />
+                    <CommentForPage newsId={id!} /> 
                     </div>
                 </>
             ) : (
