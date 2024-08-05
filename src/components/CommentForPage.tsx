@@ -10,6 +10,7 @@ interface UserReference {
 }
 
 interface UserCommentDetails {
+    commentId: string;
     fromUserId: string;
     toUserId?: string;
     content: string;
@@ -33,6 +34,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
     const [username, setUsername] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [replyingTo, setReplyingTo] = useState<string | undefined>(undefined);
+    const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -43,6 +45,8 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
 
         const storedUsername = localStorage.getItem('name') || '';
         setUsername(storedUsername);
+        const storedUserId = localStorage.getItem('userId');
+        setUserId(storedUserId);
 
         handleFetchComments();
     }, [newsId]);
@@ -91,16 +95,9 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
         }
     };
 
-    const handleDeleteMessage = async (newsId: string, fromUserId: string, toUserId: string, content: string) => {
-        const commentPayload = {
-            newsId: newsId,
-            fromUserId: fromUserId,
-            toUserId: toUserId,
-            content: content
-        };
-
+    const handleDeleteMessage = async (commentId: string) => {
         try {
-            await removeComment(commentPayload);
+            await removeComment(commentId);
             handleFetchComments(); // Refresh the comments list
         } catch (error) {
             console.error('Error deleting message:', error);
@@ -151,9 +148,11 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                                                 <button onClick={() => handleReplyToMessage(userComment.fromUserId, userComment.fromUserName || '')}>
                                                     <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
                                                 </button>
-                                                <button onClick={() => handleDeleteMessage(comment.id, userComment.fromUserId, userComment.toUserId || '', userComment.content)}>
-                                                    <FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" className="icon-delete" />
-                                                </button>
+                                                {userId === userComment.fromUserId && (
+                                                    <button onClick={() => handleDeleteMessage(userComment.commentId)}>
+                                                        <FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" className="icon-delete" />
+                                                    </button>
+                                                )}
                                             </div>
                                         </div>
                                     ))}

@@ -23,12 +23,10 @@ export const addComment = async (newComment: { newsId: string; fromUserId: strin
     }
 };
 
-export const removeComment = async (commentPayload: { newsId: string; fromUserId: string; toUserId: string; content: string }) => {
+export const removeComment = async (commentId: string) => {
     try {
-        console.log('Removing comment with payload:', commentPayload); // Debugging payload
-        await AxiosInstance.post(`/Comments/remove-comment`, commentPayload, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
+        console.log('Removing comment with payload:', commentId); // Debugging payload
+        await AxiosInstance.post(`/Comments/remove-comment`,  commentId);
     } catch (error) {
         console.error('Error deleting message:', error);
         throw error;
