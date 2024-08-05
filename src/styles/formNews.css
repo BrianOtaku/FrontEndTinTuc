@@ -1,53 +1,47 @@
 .home 
 {
-    /* border: 1px solid black; */
     display: flex;
     width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 0;
+    padding-left: 0;
 }
-  
-.homeandaside
+
+.homeandaside 
 {
     width: 70%;
     margin-right: 10px;
-    /* border: 1px solid black; */
 }
 
 .side-content 
 {
-    border: 0px;
-    margin-left: 0px;
     width: 30%;
     height: 100%;
     background-color: rgb(237, 237, 237);
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    /* border: 1px solid black; */
 }
 
-.news-page
+.news-page 
 {
-    /* border: 1px solid black; */
     display: flex;
+    flex-direction: column;
     width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 0;
+    padding-left: 0;
 }
 
-.news-list
+.news-list 
 {
-    /* border: 1px solid black; */
-    width: 100%;
     list-style-type: none;
     padding: 0;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
-.gap-between-item
+.gap-between-item 
 {
-    width: 100%;
+    display: flex; /* Sử dụng Flexbox để căn chỉnh ảnh bên trái và nội dung bên phải */
+    align-items: center;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -56,54 +50,47 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.gap-between-item:not(:last-child)
+.gap-between-item:not(:last-child) 
 {
     margin-bottom: 15px;
 }
 
-.gap-between-item:hover
+.gap-between-item:hover 
 {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.news-image 
+{
+    max-width: 100%; /* Đặt kích thước cố định cho ảnh */
+    height: auto;
+    border-radius: 4px;
+    margin-right: 20px; /* Khoảng cách giữa ảnh và nội dung */
 }
 
 .news-title 
 {
     /* border: 1px solid black; */
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin-bottom: 10px;
 }
 
-.news-title:hover
+.news-title:hover 
 {
-    text-decoration: underline 1px;
-}
-
-/* .news-link 
-{
-    display: block;
-    margin-bottom: 10px;
-} */
-
-.news-image 
-{
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+    text-decoration: underline;
 }
 
 .news-description 
 {
-    font-size: 1em;
+    margin-left: 20px;
+    font-size: 1.05em;
     margin-bottom: 10px;
 }
 
-.search-results-sentence
+.search-results-sentence 
 {
     height: auto;
     padding: 10px;
     align-items: center;
     margin-bottom: 10px;
-    /* border: 1px solid black; */
 }
-
-

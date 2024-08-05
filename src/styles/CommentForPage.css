@@ -115,3 +115,17 @@
 {
     color: rgb(94, 94, 94);
 }
+
+.reply-ver2 
+{
+    margin-left: 20px;
+    border-left: 1px dashed rgb(128, 128, 128);
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+.replies-container 
+{
+    height: 100%;
+    margin-top: 10px;
+}

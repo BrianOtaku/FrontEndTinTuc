@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { fetchNews } from '../API/apiNews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import Aside from './Aside';
 
 interface Data {
@@ -19,6 +20,7 @@ const Home: React.FC = () => {
     const [currentItems, setCurrentItems] = useState<Data[]>([]);
     const [itemsPerPage] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getData = async () => {
@@ -40,9 +42,12 @@ const Home: React.FC = () => {
         setPage(nextPage);
     };
 
+    const handleItemClick = (id: number) => {
+        navigate(`/news/${id}`);
+    };
+
     return (
         <Container className="home">
-            {/* Danh sách dữ liệu */}
             <div className="homeandaside">
                 <h1>
                     <FontAwesomeIcon icon={faNewspaper} aria-hidden="true" style={{ marginRight: '10px' }} />
@@ -51,11 +56,9 @@ const Home: React.FC = () => {
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">
-                            <div onClick={() => window.location.href = `/News/${data.id}`}>
+                            <img src={data.imageUrl} alt={data.title} className="news-image" />
+                            <div onClick={() => handleItemClick(data.id)}>
                                 <h2 className="news-title">{data.title}</h2>
-                                <a href={data.linkDetail} target="_blank" rel="noopener noreferrer">
-                                    <img src={data.imageUrl} alt={data.title} className="news-image" />
-                                </a>
                                 <p className="news-description">{data.description}</p>
                             </div>
                         </div>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { fetchNewsByType } from '../API/apiNews';
-import Aside from '../pages/Aside';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 interface Data {
     id: number;
@@ -19,11 +18,10 @@ interface Props {
 
 const NewsPage: React.FC<Props> = ({ type }) => {
     const [dataList, setDataList] = useState<Data[]>([]);
-    // const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
     const [currentItems, setCurrentItems] = useState<Data[]>([]);
     const [itemsPerPage] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getData = async () => {
@@ -36,7 +34,6 @@ const NewsPage: React.FC<Props> = ({ type }) => {
     }, [type, itemsPerPage]);
 
     const handleItemClick = (id: number) => {
-        // Điều hướng đến trang chi tiết tin tức
         navigate(`/news/${id}`);
     };
 
@@ -50,32 +47,19 @@ const NewsPage: React.FC<Props> = ({ type }) => {
 
     return (
         <Container className="home">
-            {/* Danh sách dữ liệu */}
             <div className="news-page">
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">
+                            <img src={data.imageUrl} alt={data.title} className="news-image" />
                             <div onClick={() => handleItemClick(data.id)}>
                                 <h2 className="news-title">{data.title}</h2>
-                                <img src={data.imageUrl} alt={data.title} className="news-image" />
                                 <p className="news-description">{data.description}</p>
-
-                                {/* Vùng hiển thị nội dung của mục tin tức */}
-                                {/* {selectedNewsId === data.id && (
-                                    <div className="news-content">
-                                        <h3>{data.title}</h3>
-                                        <img src={data.imageUrl} alt={data.title} className="news-image" />
-                                        <p>{data.description}</p>
-                                        <div dangerouslySetInnerHTML={{ __html: data.content }} />
-                                    </div>
-                                )} */}
-
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Nút Load More */}
                 {currentItems.length < dataList.length && (
                     <div className="load-more">
                         <button onClick={loadMore} className="load-more-button">
@@ -84,11 +68,6 @@ const NewsPage: React.FC<Props> = ({ type }) => {
                     </div>
                 )}
             </div>
-
-            {/* Thẻ aside */}
-            {/* <div className="side-content">
-                <Aside />
-            </div> */}
         </Container>
     );
 };

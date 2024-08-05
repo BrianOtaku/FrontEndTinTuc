@@ -36,12 +36,10 @@ const SearchResults: React.FC = () => {
         fetchResults();
     }, [query]);
 
-
-
     return (
         <div>
             <h2 className='search-results-sentence'>
-                <FontAwesomeIcon icon={faArrowCircleRight} />  Kết quả tìm kiếm cho: "{query}"
+                <FontAwesomeIcon icon={faArrowCircleRight} /> Kết quả tìm kiếm cho: "{query}"
             </h2>
             <Container className="home">
                 {loading ? (
@@ -52,12 +50,12 @@ const SearchResults: React.FC = () => {
                     <div className="news-list">
                         {results.map((result) => (
                             <div key={result.id} className="gap-between-item">
-                                <div className="news-item" onClick={() => window.location.href = `/News/${result.id}`}>
-                                    <h2 className='news-title'>{result.title}</h2>
-                                    <a href={result.linkDetail} target="_blank" rel="noopener noreferrer">
-                                        <img src={result.imageUrl} alt={result.title} className='news-image' />
-                                    </a>
-                                    <p className='news-description'>{result.description}</p>
+                                <img src={result.imageUrl} alt={result.title} className='news-image' />
+                                <div onClick={() => window.location.href = `/News/${result.id}`}>
+                                    <div className="news-content">
+                                        <h2 className='news-title'>{result.title}</h2>
+                                        <p className='news-description'>{result.description}</p>
+                                    </div>
                                 </div>
                             </div>
                         ))}
