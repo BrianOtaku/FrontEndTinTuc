@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSignOutAlt, faAddressCard, } from '@fortawesome/free-solid-svg-icons';
 import { decodeToken } from '../API/axiosConfig';
 import { getAccountById } from '../API/apiAccount';
 
@@ -51,7 +51,7 @@ const OffcanvasComponent: React.FC = () => {
                 </Button>
                 <Offcanvas show={show} onHide={handleClose} placement="end" scroll={true} backdrop={true} className='offcanvas-custom'>
                     <Offcanvas.Header closeButton closeVariant='white'>
-                        <FontAwesomeIcon icon={faUserCircle} aria-hidden="true" className='user-icon' />
+                        <FontAwesomeIcon icon={faAddressCard} aria-hidden="true" className='user-icon' />
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         {accountData ? (

@@ -29,7 +29,7 @@ const SignUp: React.FC = () => {
 
         setErrorMessage('');
 
-        const registerData = { email, password, name: username, roles:"User" };
+        const registerData = { email, password, name: username, roles: "User" };
 
         try {
             const response = await register(registerData);
@@ -134,6 +134,7 @@ const SignUp: React.FC = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </Container>
     );
 };

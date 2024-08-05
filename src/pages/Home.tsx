@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { fetchNews } from '../API/apiNews';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import Aside from './Aside';
 
 interface Data {
@@ -42,6 +44,10 @@ const Home: React.FC = () => {
         <Container className="home">
             {/* Danh sách dữ liệu */}
             <div className="homeandaside">
+                <h1>
+                    <FontAwesomeIcon icon={faNewspaper} aria-hidden="true" style={{ marginRight: '10px' }} />
+                    Tin tức mới gần đây:
+                </h1>
                 <div className="news-list">
                     {currentItems.map((data) => (
                         <div key={data.id} className="gap-between-item">

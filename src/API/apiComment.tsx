@@ -25,6 +25,7 @@ export const addComment = async (newComment: { newsId: string; fromUserId: strin
 
 export const removeComment = async (commentPayload: { newsId: string; fromUserId: string; toUserId: string; content: string }) => {
     try {
+        console.log('Removing comment with payload:', commentPayload); // Debugging payload
         await AxiosInstance.post(`/Comments/remove-comment`, commentPayload, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });

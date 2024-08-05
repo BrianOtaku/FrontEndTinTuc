@@ -30,12 +30,8 @@ const SignIn: React.FC = () => {
                 console.log('Login successful:', token);
                 localStorage.setItem('token', token.toString())
                 setErrorMessage('');
-                alert('Đăng nhập thành công');
-
+                // alert('Đăng nhập thành công');
                 window.location.href = '/';
-
-
-
             } else {
                 setErrorMessage('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.');
             }
