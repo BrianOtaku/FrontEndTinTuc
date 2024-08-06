@@ -66,7 +66,7 @@ const OffcanvasComponent: React.FC = () => {
                         ) : (
                             <div>
                                 <h3>Oops!...</h3>
-                                <p>Bạn chưa đăng nhập.</p>
+                                <h5>Bạn chưa đăng nhập.</h5>
                             </div>
                         )}
                     </Offcanvas.Body>

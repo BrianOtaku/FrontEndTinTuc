@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchNews } from '../API/apiNews'; // Hoặc sử dụng fetchNews nếu bạn muốn lấy tất cả các tin
+import { fetchNews } from '../API/apiNews';
 import CommentForPage from '../components/CommentForPage';
 
 interface Data {
@@ -34,16 +34,16 @@ const NewsDetail: React.FC = () => {
         <div className="news-detail">
             {newsItem ? (
                 <>
-                    <h1>{newsItem.title}</h1>
-                    <img src={newsItem.imageUrl} alt={newsItem.title} />
-                    <p>{newsItem.description}</p>
-                    <div dangerouslySetInnerHTML={{ __html: newsItem.content }} /> {/* Nếu nội dung có HTML */}
-                    <div>
+                    <h1 className="news-detail-title">{newsItem.title}</h1>
+                    <img className="news-detail-image" src={newsItem.imageUrl} alt={newsItem.title} />
+                    <p className="news-detail-description">{newsItem.description}</p>
+                    <div className="news-detail-content" dangerouslySetInnerHTML={{ __html: newsItem.content }} />
+                    <div className="comments-detail-section">
                         <CommentForPage newsId={id!} />
                     </div>
                 </>
             ) : (
-                <p>Loading...</p>
+                <p className="loading-text">Loading...</p>
             )}
         </div>
     );

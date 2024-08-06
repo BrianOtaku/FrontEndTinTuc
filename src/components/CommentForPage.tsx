@@ -104,8 +104,8 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
         }
     };
 
-    const handleReplyToMessage = (userId: string, userName: string) => {
-        setReplyingTo(userId);
+    const handleReplyToMessage = (commentId: string, userId: string, userName: string) => {
+        setReplyingTo(commentId);
         setMessage(`@${userName} `);
     };
 
@@ -145,7 +145,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                                         <div key={index} className={`message-ver2 ${userComment.toUserId ? 'reply' : ''}`}>
                                             <strong>{userComment.fromUserName}</strong>: {userComment.content}
                                             <div className="comment-actions">
-                                                <button onClick={() => handleReplyToMessage(userComment.fromUserId, userComment.fromUserName || '')}>
+                                                <button onClick={() => handleReplyToMessage(userComment.commentId, userComment.fromUserId, userComment.fromUserName || '')}>
                                                     <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
                                                 </button>
                                                 {userId === userComment.fromUserId && (
@@ -167,6 +167,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                     <FontAwesomeIcon icon={faNewspaper} aria-hidden="true" style={{ marginRight: '10px' }} />
                     Tin tức khác:
                 </h1>
+                {/* <div className='endContentRight-down'> */}
                 <div className='newsDisplay-gap'>
                     <NewsPage type='chinh-tri' />
                 </div>
@@ -179,6 +180,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                 <div className='newsDisplay-gap'>
                     <NewsPage type='dan-sinh' />
                 </div>
+                {/* </div> */}
             </div>
         </div>
     );
