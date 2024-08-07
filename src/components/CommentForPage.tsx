@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchComments, addComment, removeComment } from '../API/apiComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faReply, faTrashAlt, faComments, faNewspaper, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faTrashAlt, faComments, faNewspaper, faComment } from '@fortawesome/free-solid-svg-icons';
 import NewsPage from '../template/newsPage';
 
 interface UserReference {
@@ -33,7 +33,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [replyingTo, setReplyingTo] = useState<string | undefined>(undefined);
+    // const [replyingTo, setReplyingTo] = useState<string | undefined>(undefined);
     const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
@@ -75,15 +75,15 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
         const newComment = {
             newsId: newsId,
             fromUserId: fromUserId,
-            toUserId: replyingTo || null,
+            toUserId: null,  // trả lời bị vô hiệu hóa
             content: message
         };
 
         try {
             await addComment(newComment);
-            handleFetchComments(); // Refresh the comments list
+            handleFetchComments(); // Làm mới danh sách bình luận
             setMessage('');
-            setReplyingTo(undefined);  // Reset replyTo after sending message
+            // setReplyingTo(undefined);  // Reset replyTo sau khi gửi tin nhắn
         } catch (error) {
             console.error('Error sending message:', error);
         }
@@ -98,16 +98,16 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
     const handleDeleteMessage = async (commentId: string) => {
         try {
             await removeComment(commentId);
-            handleFetchComments(); // Refresh the comments list
+            handleFetchComments(); // Làm mới danh sách bình luận
         } catch (error) {
             console.error('Error deleting message:', error);
         }
     };
 
-    const handleReplyToMessage = (commentId: string, userId: string, userName: string) => {
-        setReplyingTo(commentId);
-        setMessage(`@${userName} `);
-    };
+    // const handleReplyToMessage = (commentId: string, userId: string, userName: string) => {
+    //     setReplyingTo(commentId);
+    //     setMessage(`@${userName} `);
+    // };
 
     return (
         <div className='endContent'>
@@ -145,9 +145,9 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                                         <div key={index} className={`message-ver2 ${userComment.toUserId ? 'reply' : ''}`}>
                                             <strong>{userComment.fromUserName}</strong>: {userComment.content}
                                             <div className="comment-actions">
-                                                <button onClick={() => handleReplyToMessage(userComment.commentId, userComment.fromUserId, userComment.fromUserName || '')}>
+                                                {/* <button onClick={() => handleReplyToMessage(userComment.commentId, userComment.fromUserId, userComment.fromUserName!)}>
                                                     <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
-                                                </button>
+                                                </button> */}
                                                 {userId === userComment.fromUserId && (
                                                     <button onClick={() => handleDeleteMessage(userComment.commentId)}>
                                                         <FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" className="icon-delete" />

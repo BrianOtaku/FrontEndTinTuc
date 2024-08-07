@@ -32,6 +32,8 @@ import './styles/CommentForPage.css';
 // import css trang
 import './styles/SignIn.css';
 import './styles/SignUp.css';
+import Hope from './pages/Hope';
+import Mekong from './pages/Mekong';
 // import './styles/Home.css';
 
 function App() {
@@ -50,6 +52,8 @@ function App() {
               <Route path="/populace" element={<Populace />} />
               <Route path="/labour" element={<Labour />} />
               <Route path="/transport" element={<Transport />} />
+              <Route path="/quy-hy-vong" element={<Hope />} />
+              <Route path="/mekong" element={<Mekong />} /> 
               <Route path="/login" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/news/:id" element={<NewsDetail />} />

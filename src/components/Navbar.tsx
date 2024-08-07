@@ -42,6 +42,8 @@ function Taskbar() {
                             <NavDropdown.Item as={Link} to="/populace">Dân sinh</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/labour">Lao động việc làm</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/transport">Giao thông</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/mekong">Mê-kong</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/quy-hy-vong">Quỹ hy vọng</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav className="mr-auto">
