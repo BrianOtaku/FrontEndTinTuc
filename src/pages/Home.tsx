@@ -10,7 +10,7 @@ interface Data {
     id: number;
     title: string;
     linkDetail: string;
-    imageUrl: string | null;
+    imageUrl: string;
     description: string;
     content: string;
 }
@@ -54,22 +54,17 @@ const Home: React.FC = () => {
                     Tin tức mới gần đây:
                 </h1>
                 <div className="news-list">
-                    {currentItems.map((data) => {
-                        // Kiểm tra nếu imageUrl không phải là null và bắt đầu bằng "data:"
-                        const imageUrl = data.imageUrl && data.imageUrl.startsWith('data:')
-                            ? 'https://via.placeholder.com/175' // URL của hình ảnh mặc định
-                            : data.imageUrl || 'https://via.placeholder.com/175'; // Hình ảnh mặc định nếu imageUrl là null
-
-                        return (
-                            <div key={data.id} className="gap-between-item">
-                                <img src={imageUrl} alt={data.title} className="news-image" />
-                                <div onClick={() => handleItemClick(data.id)}>
-                                    <h2 className="news-title">{data.title}</h2>
-                                    <p className="news-description">{data.description}</p>
-                                </div>
+                    {currentItems.map((data) => (
+                        <div key={data.id} className="gap-between-item" onClick={() => handleItemClick(data.id)}>
+                            <img src={data.imageUrl && data.imageUrl.startsWith('data:')
+                            ? 'https://via.placeholder.com/300x175'
+                            : data.imageUrl || 'https://via.placeholder.com/300x175'} alt={data.title} className="news-image" />
+                            <div>
+                                <h2 className="news-title">{data.title}</h2>
+                                <p className="news-description">{data.description}</p>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
 
                 {/* Nút Load More */}

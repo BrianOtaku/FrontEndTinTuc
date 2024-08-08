@@ -50,9 +50,16 @@ const NewsPage: React.FC<Props> = ({ type }) => {
             <div className="news-page">
                 <div className="news-list">
                     {currentItems.map((data) => (
-                        <div key={data.id} className="gap-between-item">
-                            <img src={data.imageUrl} alt={data.title} className="news-image" />
-                            <div onClick={() => handleItemClick(data.id)}>
+                        <div key={data.id} className="gap-between-item" onClick={() => handleItemClick(data.id)}>
+                            <img
+                                src={data.imageUrl && data.imageUrl.startsWith('data:')
+                                    ? 'https://via.placeholder.com/300x175' // URL của hình ảnh mặc định
+                                    : data.imageUrl || 'https://via.placeholder.com/300x175'}
+                                alt={data.title}
+                            className="news-image"
+                        />
+
+                            <div >
                                 <h2 className="news-title">{data.title}</h2>
                                 <p className="news-description">{data.description}</p>
                             </div>

@@ -35,7 +35,9 @@ const NewsDetail: React.FC = () => {
             {newsItem ? (
                 <>
                     <h1 className="news-detail-title">{newsItem.title}</h1>
-                    <img className="news-detail-image" src={newsItem.imageUrl} alt={newsItem.title} />
+                    <img className="news-detail-image" src={newsItem.imageUrl && newsItem.imageUrl.startsWith('data:')
+                            ? 'https://via.placeholder.com/300x175' // URL của hình ảnh mặc định
+                            : newsItem.imageUrl || 'https://via.placeholder.com/300x175'} alt={newsItem.title} />
                     <p className="news-detail-description">{newsItem.description}</p>
                     <div className="news-detail-content" dangerouslySetInnerHTML={{ __html: newsItem.content }} />
                     <div className="comments-detail-section">
