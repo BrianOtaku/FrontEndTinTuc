@@ -180,6 +180,12 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                 <div className='newsDisplay-gap'>
                     <NewsPage type='dan-sinh' />
                 </div>
+                <div className='newsDisplay-gap'>
+                    <NewsPage type='quy-hy-vong' />
+                </div>
+                <div className='newsDisplay-gap'>
+                    <NewsPage type='mekong' />
+                </div>
                 {/* </div> */}
             </div>
         </div>
