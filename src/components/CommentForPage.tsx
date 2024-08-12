@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchComments, addComment, removeComment } from '../API/apiComment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faTrashAlt, faComments, faNewspaper, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faTrashAlt, faComments, faNewspaper, faComment, faReply } from '@fortawesome/free-solid-svg-icons';
 import NewsPage from '../template/newsPage';
 
 interface UserReference {
@@ -33,7 +33,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
     const [message, setMessage] = useState('');
     const [username, setUsername] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    // const [replyingTo, setReplyingTo] = useState<string | undefined>(undefined);
+    const [replyingTo, setReplyingTo] = useState<string | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
@@ -55,6 +55,7 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
         try {
             const fetchedComments = await fetchComments(newsId);
             setComments(fetchedComments);
+            console.log("check Comment before send >>>>>>>>>>>>>>>>",fetchedComments)
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -65,25 +66,27 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
             alert('Bạn cần nhập tin nhắn.');
             return;
         }
-
+    
         const fromUserId = localStorage.getItem('userId');
         if (!fromUserId) {
             alert('User ID not found.');
             return;
         }
-
+    
         const newComment = {
             newsId: newsId,
             fromUserId: fromUserId,
-            toUserId: null,  // trả lời bị vô hiệu hóa
+            toUserId: replyingTo ? replyingTo : null, // Gán `toUserId` nếu đang trả lời
+            toCommentId: replyingTo , // Gán `ToCommentId` nếu đang trả lời
             content: message
         };
-
+    
         try {
+            console.log("check mess after send >>>>>>>>>>>>>>>>",newComment)
             await addComment(newComment);
             handleFetchComments(); // Làm mới danh sách bình luận
             setMessage('');
-            // setReplyingTo(undefined);  // Reset replyTo sau khi gửi tin nhắn
+            setReplyingTo(null);  // Reset replyTo sau khi gửi tin nhắn
         } catch (error) {
             console.error('Error sending message:', error);
         }
@@ -104,10 +107,10 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
         }
     };
 
-    // const handleReplyToMessage = (commentId: string, userId: string, userName: string) => {
-    //     setReplyingTo(commentId);
-    //     setMessage(`@${userName} `);
-    // };
+    const handleReplyToMessage = (commentId: string, userName: string) => {
+        setReplyingTo(commentId);
+        setMessage(`@${userName} `);
+    };
 
     return (
         <div className='endContent'>
@@ -145,9 +148,9 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                                         <div key={index} className={`message-ver2 ${userComment.toUserId ? 'reply' : ''}`}>
                                             <strong>{userComment.fromUserName}</strong>: {userComment.content}
                                             <div className="comment-actions">
-                                                {/* <button onClick={() => handleReplyToMessage(userComment.commentId, userComment.fromUserId, userComment.fromUserName!)}>
+                                                <button onClick={() => handleReplyToMessage(userComment.commentId, userComment.fromUserName!)}>
                                                     <FontAwesomeIcon icon={faReply} aria-hidden="true" className="icon-reply" />
-                                                </button> */}
+                                                </button>
                                                 {userId === userComment.fromUserId && (
                                                     <button onClick={() => handleDeleteMessage(userComment.commentId)}>
                                                         <FontAwesomeIcon icon={faTrashAlt} aria-hidden="true" className="icon-delete" />
@@ -167,7 +170,6 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                     <FontAwesomeIcon icon={faNewspaper} aria-hidden="true" style={{ marginRight: '10px' }} />
                     Tin tức khác:
                 </h1>
-                {/* <div className='endContentRight-down'> */}
                 <div className='newsDisplay-gap'>
                     <NewsPage type='chinh-tri' />
                 </div>
@@ -186,7 +188,6 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
                 <div className='newsDisplay-gap'>
                     <NewsPage type='mekong' />
                 </div>
-                {/* </div> */}
             </div>
         </div>
     );
