@@ -62,35 +62,37 @@ const CommentForPage: React.FC<CommentForPageProps> = ({ newsId }) => {
     };
 
     const handleSendMessage = async () => {
-        if (message.trim() === '') {
-            alert('Bạn cần nhập tin nhắn.');
-            return;
-        }
-    
-        const fromUserId = localStorage.getItem('userId');
-        if (!fromUserId) {
-            alert('User ID not found.');
-            return;
-        }
-    
-        const newComment = {
-            newsId: newsId,
-            fromUserId: fromUserId,
-            toUserId: replyingTo ? replyingTo : null, // Gán `toUserId` nếu đang trả lời
-            toCommentId: replyingTo , // Gán `ToCommentId` nếu đang trả lời
-            content: message
-        };
-    
-        try {
-            console.log("check mess after send >>>>>>>>>>>>>>>>",newComment)
-            await addComment(newComment);
-            handleFetchComments(); // Làm mới danh sách bình luận
-            setMessage('');
-            setReplyingTo(null);  // Reset replyTo sau khi gửi tin nhắn
-        } catch (error) {
-            console.error('Error sending message:', error);
-        }
+    if (message.trim() === '') {
+        alert('Bạn cần nhập tin nhắn.');
+        return;
+    }
+
+    const fromUserId = localStorage.getItem('userId');
+    if (!fromUserId) {
+        alert('User ID not found.');
+        return;
+    }
+
+    const newComment = {
+        newsId: newsId,
+        fromUserId: fromUserId,
+        toUserId: replyingTo ? replyingTo : null, // Gán `toUserId` nếu đang trả lời
+        toCommentId: replyingTo , // Gán `ToCommentId` nếu đang trả lời
+        content: message,
+      
     };
+
+    try {
+        console.log("check mess after send >>>>>>>>>>>>>>>>",newComment)
+        await addComment(newComment);
+        handleFetchComments(); // Làm mới danh sách bình luận
+        setMessage('');
+        setReplyingTo(null);  // Reset replyTo sau khi gửi tin nhắn
+    } catch (error) {
+        console.error('Error sending message:', error);
+    }
+};
+
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
