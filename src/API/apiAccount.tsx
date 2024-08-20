@@ -67,6 +67,14 @@ export const getAccountById = async (id: string, token: string): Promise<Account
                         localStorage.removeItem('name');
                     }
                 }
+                else{
+                    alert('đã xảy ra lỗi');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('name');
+                    window.location.reload();
+                }
+
+
             } else {
                 // Xử lý các lỗi khác
                 alert("Đã xảy ra lỗi: " + message);
